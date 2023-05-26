@@ -33,6 +33,24 @@ app.get("/buttonClicks", (req, res) => {
   });
 });
 
+let roverCoordinates = null
+
+app.post("/roverCoordinatePost", (req, res) => {
+  const { coordinates } = req.body; // Extract the coordinates from the request body
+  console.log("Received coordinates:", coordinates); // Log the received coordinates // You can perform any necessary processing with the coordinates here
+
+  roverCoordinates = coordinates
+  
+  res.sendStatus(200); // Send a success status code (200)
+});
+
+app.get("/roverCoordinates", (req, res) => {
+
+  res.json({
+    roverCoordinates: roverCoordinates,
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`); // Start the server and log the port it's listening on
 });
