@@ -8,8 +8,6 @@ const app = express();
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // Parse incoming JSON data
 
-let buttonClicks = []; // Array to store button click data
-
 app.get("/numericalInput", (req, res) => {
   var numericalInput = 69; // Replace with your desired numerical input
 
@@ -18,6 +16,7 @@ app.get("/numericalInput", (req, res) => {
   });
 });
 
+let buttonClicks = []; // Array to store button click data
 app.post("/buttonClickPost", (req, res) => {
   const { direction } = req.body; // Extract the direction from the request body
   console.log("Button clicked:", direction); // Log the clicked direction
