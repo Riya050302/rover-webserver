@@ -18,7 +18,7 @@ app.get("/numericalInput", (req, res) => {
   });
 });
 
-app.post("/buttonClick", (req, res) => {
+app.post("/buttonClickPost", (req, res) => {
   const { direction } = req.body; // Extract the direction from the request body
   console.log("Button clicked:", direction); // Log the clicked direction
 
