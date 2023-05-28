@@ -9,7 +9,7 @@ app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // Parse incoming JSON data
 
 app.get("/numericalInput", (req, res) => {
-  var numericalInput = 69; // Replace with your desired numerical input
+  var numericalInput = 70; // Replace with your desired numerical input
 
   res.json({
     numericalInput: numericalInput,
