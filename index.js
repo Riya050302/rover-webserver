@@ -8,6 +8,8 @@ const app = express();
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // Parse incoming JSON data
 
+//================FOR CLIENT LAPTOP================================================
+//GET REQUEST (Client Laptop)======================================================
 app.get("/numericalInput", (req, res) => {
   var numericalInput = 70; // Replace with your desired numerical input
 
@@ -16,6 +18,7 @@ app.get("/numericalInput", (req, res) => {
   });
 });
 
+//POST REQUEST (Client Laptop)======================================================
 let buttonClicks = []; // Array to store button click data
 app.post("/buttonClickPost", (req, res) => {
   const { direction } = req.body; // Extract the direction from the request body
@@ -32,8 +35,18 @@ app.get("/buttonClicks", (req, res) => {
   });
 });
 
-let roverCoordinates = null
+//================FOR ESP32=========================================================
+//GET REQUEST (ESP32)===============================================================
+app.get("/numericalInputESP", (req, res) => {
+  var numericalInputESP = 70; // Replace with your desired numerical input
 
+  res.json({
+    numericalInputESP: numericalInputESP,
+  });
+});
+
+//POST REQUEST (ESP32)==============================================================
+let roverCoordinates = null
 app.post("/roverCoordinatePost", (req, res) => {
   const { coordinates } = req.body; // Extract the coordinates from the request body
   console.log("Received coordinates:", coordinates); // Log the received coordinates // You can perform any necessary processing with the coordinates here
