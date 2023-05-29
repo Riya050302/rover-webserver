@@ -26,10 +26,12 @@ app.post("/buttonClickPost", (req, res) => {
 
   buttonClicks.push(direction); // Add the clicked direction to the buttonClicks array
 
-  setTimeout(function(){console.log("Delayed by 2 seconds")}, 2000);
-  const removedElement = buttonClicks.pop();
-  console.log(removedElement);
-
+  setTimeout(function(){
+    const removedElement = buttonClicks.pop();
+    console.log(removedElement);
+    console.log("Delayed by 2 seconds");
+  }, 2000);
+  
   res.sendStatus(200); // Send a success status code (200)
 });
 
