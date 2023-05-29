@@ -53,7 +53,7 @@ app.post("/setManualMode", (req, res) => {
 //================FOR ESP32=========================================================
 //GET REQUEST (ESP32)===============================================================
 app.get("/nextDirection", (req, res) => {
-  var nextDirection = direction; // Assuming direction is defined and initialized
+  var nextDirection = mvmtClicks; // Assuming direction is defined and initialized
   if (mode == "manual") {
     res.json({ nextDirection: nextDirection });
   } 
