@@ -35,6 +35,10 @@ app.get("/buttonClicks", (req, res) => {
   });
 });
 
+setTimeout(function(){console.log("Delayed by 2 seconds")}, 2000);
+const removedElement = buttonClicks.pop();
+console.log(removedElement);
+
 //================FOR ESP32=========================================================
 //GET REQUEST (ESP32)===============================================================
 app.get("/numericalInputESP", (req, res) => {
