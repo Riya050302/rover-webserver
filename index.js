@@ -30,7 +30,7 @@ app.post("/mvmtClickPost", (req, res) => {
     const removedElement = mvmtClicks.pop();
     //console.log(removedElement);
     //console.log("Delayed by 2 seconds");
-  }, 2000);
+  }, 5000);
   
   res.sendStatus(200); // Send a success status code (200)
 });
@@ -61,8 +61,6 @@ app.get("/nextDirection", (req, res) => {
   } 
 });
 
-
-
 //POST REQUEST (ESP32)==============================================================
 let roverCoordinates = null
 app.post("/roverCoordinatePost", (req, res) => {
@@ -75,7 +73,6 @@ app.post("/roverCoordinatePost", (req, res) => {
 });
 
 app.get("/roverCoordinates", (req, res) => {
-
   res.json({
     roverCoordinates: roverCoordinates,
   });
