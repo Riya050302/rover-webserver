@@ -41,10 +41,11 @@ app.get("/mvmtClicks", (req, res) => {
   });
 });
 
+var modeType;
 app.post("/setManualMode", (req, res) => {
   const { mode } = req.body; // Extract the mode from the request body
 
-  manualMode = mode; // Update the manual mode flag
+  modeType = mode; // Update the manual mode flag
   console.log("Mode:", mode);
   res.sendStatus(200); // Send a success status code (200)
 });
@@ -54,7 +55,7 @@ app.post("/setManualMode", (req, res) => {
 //GET REQUEST (ESP32)===============================================================
 app.get("/nextDirection", (req, res) => {
   let nextDirection = mvmtClicks; // Assuming direction is defined and initialized
-  if (mode == "manual") {
+  if (modeType == "manual") {
     res.json({ nextDirection: nextDirection });
   } 
 });
