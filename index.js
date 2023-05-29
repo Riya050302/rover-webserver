@@ -26,6 +26,10 @@ app.post("/buttonClickPost", (req, res) => {
 
   buttonClicks.push(direction); // Add the clicked direction to the buttonClicks array
 
+  setTimeout(function(){console.log("Delayed by 2 seconds")}, 2000);
+  const removedElement = buttonClicks.pop();
+  console.log(removedElement);
+
   res.sendStatus(200); // Send a success status code (200)
 });
 
@@ -35,9 +39,7 @@ app.get("/buttonClicks", (req, res) => {
   });
 });
 
-setTimeout(function(){console.log("Delayed by 2 seconds")}, 2000);
-const removedElement = buttonClicks.pop();
-console.log(removedElement);
+
 
 //================FOR ESP32=========================================================
 //GET REQUEST (ESP32)===============================================================
