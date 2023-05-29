@@ -19,28 +19,35 @@ app.get("/numericalInput", (req, res) => {
 });
 
 //POST REQUEST (Client Laptop)======================================================
-let buttonClicks = []; // Array to store button click data
-app.post("/buttonClickPost", (req, res) => {
+let mvmtClicks = []; // Array to store button click data
+app.post("/mvmtClickPost", (req, res) => {
   const { direction } = req.body; // Extract the direction from the request body
   console.log("Button clicked:", direction); // Log the clicked direction
 
-  buttonClicks.push(direction); // Add the clicked direction to the buttonClicks array
+  mvmtClicks.push(direction); // Add the clicked direction to the buttonClicks array
 
   setTimeout(function(){
-    const removedElement = buttonClicks.pop();
-    console.log(removedElement);
-    console.log("Delayed by 2 seconds");
+    const removedElement = mvmtClicks.pop();
+    //console.log(removedElement);
+    //console.log("Delayed by 2 seconds");
   }, 2000);
   
   res.sendStatus(200); // Send a success status code (200)
 });
 
-app.get("/buttonClicks", (req, res) => {
+app.get("/mvmtClicks", (req, res) => {
   res.json({
-    buttonClicks: buttonClicks, // Return the buttonClicks array as JSON response
+    mvmtClicks: mvmtClicks, // Return the buttonClicks array as JSON response
   });
 });
 
+app.post("/setManualMode", (req, res) => {
+  const { mode } = req.body; // Extract the mode from the request body
+
+  manualMode = mode; // Update the manual mode flag
+  console.log("Mode:", mode);
+  res.sendStatus(200); // Send a success status code (200)
+});
 
 
 //================FOR ESP32=========================================================
