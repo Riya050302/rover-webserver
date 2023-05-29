@@ -57,6 +57,7 @@ app.get("/nextDirection", (req, res) => {
   let nextDirection = mvmtClicks; // Assuming direction is defined and initialized
   if (modeType == "manual") {
     res.json({ nextDirection: nextDirection });
+    console.log(nextDirection);
   } 
 });
 
