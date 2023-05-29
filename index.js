@@ -52,15 +52,13 @@ app.post("/setManualMode", (req, res) => {
 
 //================FOR ESP32=========================================================
 //GET REQUEST (ESP32)===============================================================
-app.get("/numericalInputESP", (req, res) => {
-  var numericalInputESP = 70; // Replace with your desired numerical input
-
-  res.json({
-    numericalInputESP: numericalInputESP,
-    res.json({
-      nextDirection: nextDirection,
-  });
+app.get("/nextDirection", (req, res) => {
+  var nextDirection = direction; // Assuming direction is defined and initialized
+  if (mode == "manual") {
+    res.json({ nextDirection: nextDirection });
+  } 
 });
+
 
 
 //POST REQUEST (ESP32)==============================================================
