@@ -27,7 +27,7 @@ app.post("/mvmtClickPost", (req, res) => {
   mvmtClicks.push(direction); // Add the clicked direction to the buttonClicks array
 
   setTimeout(function(){
-    //const removedElement = mvmtClicks.pop();
+    const removedElement = mvmtClicks.pop();
     //console.log(removedElement);
     //console.log("Delayed by 2 seconds");
   }, 5000);
