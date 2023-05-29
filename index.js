@@ -57,8 +57,11 @@ app.get("/numericalInputESP", (req, res) => {
 
   res.json({
     numericalInputESP: numericalInputESP,
+    res.json({
+      nextDirection: nextDirection,
   });
 });
+
 
 //POST REQUEST (ESP32)==============================================================
 let roverCoordinates = null
