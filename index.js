@@ -8,47 +8,61 @@ const app = express();
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // Parse incoming JSON data
 
-//================FOR CLIENT LAPTOP================================================
-//GET REQUEST (Client Laptop)======================================================
-app.get("/numericalInput", (req, res) => {
-  var numericalInput = 70; // Replace with your desired numerical input
 
-  res.json({
-    numericalInput: numericalInput,
+function plot(coordinates) {
+  //================FOR CLIENT LAPTOP================================================
+  //GET REQUEST (Client Laptop)======================================================
+  app.get("/numericalInput", (req, res) => {
+    var numericalInput = 70; // Replace with your desired numerical input
+
+    res.json({
+      numericalInput: numericalInput,
+    });
   });
-});
 
-//POST REQUEST (Client Laptop)======================================================
-let mvmtClicks = []; // Array to store button click data
-app.post("/mvmtClickPost", (req, res) => {
-  const { direction } = req.body; // Extract the direction from the request body
-  console.log("Button clicked:", direction); // Log the clicked direction
+  //POST REQUEST (Client Laptop)======================================================
+  let mvmtClicks = []; // Array to store button click data
+  app.post("/mvmtClickPost", (req, res) => {
+    const { direction } = req.body; // Extract the direction from the request body
+    console.log("Button clicked:", direction); // Log the clicked direction
 
-  mvmtClicks.push(direction); // Add the clicked direction to the buttonClicks array
+    mvmtClicks.push(direction); // Add the clicked direction to the buttonClicks array
 
-  setTimeout(function(){
-    const removedElement = mvmtClicks.pop();
-    //console.log(removedElement);
-    //console.log("Delayed by 2 seconds");
-  }, 5000);
-  
-  res.sendStatus(200); // Send a success status code (200)
-});
+    setTimeout(function(){
+      const removedElement = mvmtClicks.pop();
+      //console.log(removedElement);
+      //console.log("Delayed by 2 seconds");
+    }, 5000);
 
-app.get("/mvmtClicks", (req, res) => {
-  res.json({
-    mvmtClicks: mvmtClicks, // Return the buttonClicks array as JSON response
+    res.sendStatus(200); // Send a success status code (200)
   });
-});
 
-var modeType;
-app.post("/setManualMode", (req, res) => {
-  const { mode } = req.body; // Extract the mode from the request body
+  app.get("/mvmtClicks", (req, res) => {
+    res.json({
+      mvmtClicks: mvmtClicks, // Return the buttonClicks array as JSON response
+    });
+  });
 
-  modeType = mode; // Update the manual mode flag
-  console.log("Mode:", mode);
-  res.sendStatus(200); // Send a success status code (200)
-});
+  var modeType;
+  app.post("/setManualMode", (req, res) => {
+    const { mode } = req.body; // Extract the mode from the request body
+
+    modeType = mode; // Update the manual mode flag
+    console.log("Mode:", mode);
+    res.sendStatus(200); // Send a success status code (200)
+  });
+
+  // Use the 'coordinates' parameter in your plotting code
+  // ...
+}
+
+// Call the plot function with the desired coordinates
+const coordinates = {
+  x: 10,
+  y: 20,
+};
+
+plot(coordinates);
 
 
 //================FOR ESP32=========================================================
