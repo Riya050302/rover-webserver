@@ -24,6 +24,7 @@ let constant = null;
 
 
 function plot(coordinates) {
+  console.log(`entered plot`);
   //================FOR CLIENT LAPTOP================================================
   //GET REQUEST (Client Laptop)======================================================
   app.get("/numericalInput", (req, res) => {
