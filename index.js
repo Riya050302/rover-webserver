@@ -80,7 +80,7 @@ app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`); // Start the server and log the port it's listening on
 });
 
-while (iterations < 20) {
+while (iterations < 100000000000) {
 
   //================FOR ESP32=========================================================
     //POST REQUEST (ESP32)==============================================================
@@ -122,6 +122,7 @@ while (iterations < 20) {
   }
   else{
     NewWall = false;
+    plot(wallCoordinate)
     app.get("/", (req, res) => {
       // Send left_following along with nextDirection
         res.json({newWall: NewWall });
@@ -136,7 +137,6 @@ while (iterations < 20) {
         console.log(direction);
     });
   }
-  console.log(`entered loop`);
   iterations++;
 
 }
