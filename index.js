@@ -21,52 +21,49 @@ let roverWallDetection = null;
 let wallCoordinate = null;
 let constant = null;
 
-
-
-function plot(coordinates) {
-  //================FOR CLIENT LAPTOP================================================
-  //GET REQUEST (Client Laptop)======================================================
-  app.get("/numericalInput", (req, res) => {
-    var numericalInput = 70; // Replace with your desired numerical input
-
-    res.json({
-      numericalInput: numericalInput,
-    });
+app.get("/numericalInput", (req, res) => {
+  var numericalInput = 70; // Replace with your desired numerical input
+  res.json({
+    numericalInput: numericalInput,
   });
+});
 
-  //POST REQUEST (Client Laptop)======================================================
-  let mvmtClicks = []; // Array to store button click data
-  app.post("/mvmtClickPost", (req, res) => {
-    const { manual_direction } = req.body; // Extract the direction from the request body
-    console.log("Button clicked:", manual_direction); // Log the clicked direction
+//POST REQUEST (Client Laptop)======================================================
+let mvmtClicks = []; // Array to store button click data
+app.post("/mvmtClickPost", (req, res) => {
+  const { manual_direction } = req.body; // Extract the direction from the request body
 
-    mvmtClicks.push(manual_direction); // Add the clicked direction to the buttonClicks array
+  mvmtClicks.push(manual_direction); // Add the clicked direction to the buttonClicks array
 
-    setTimeout(function(){
-      const removedElement = mvmtClicks.pop();
-      //console.log(removedElement);
-      //console.log("Delayed by 2 seconds");
-    }, 5000);
+  setTimeout(function(){
+    const removedElement = mvmtClicks.pop();
+    //console.log(removedElement);
+    //console.log("Delayed by 2 seconds");
+  }, 5000);
 
-    res.sendStatus(200); // Send a success status code (200)
+  res.sendStatus(200); // Send a success status code (200)
+});
+
+app.get("/mvmtClicks", (req, res) => {
+  res.json({
+    mvmtClicks: mvmtClicks, // Return the buttonClicks array as JSON response
   });
+});
 
-  app.get("/mvmtClicks", (req, res) => {
-    res.json({
-      mvmtClicks: mvmtClicks, // Return the buttonClicks array as JSON response
-    });
-  });
+var modeType;
+app.post("/setManualMode", (req, res) => {
+  const { mode } = req.body; // Extract the mode from the request body
 
-  var modeType;
-  app.post("/setManualMode", (req, res) => {
-    const { mode } = req.body; // Extract the mode from the request body
-
-    modeType = mode; // Update the manual mode flag
-    console.log("Mode:", mode);
-    res.sendStatus(200); // Send a success status code (200)
-  });
+  modeType = mode; // Update the manual mode flag
+  res.sendStatus(200); // Send a success status code (200)
+});
 
 
+
+function plot(coordinates, mode) {
+  console.log("entered plot");
+  console.log("Mode:", mode);
+  console.log("Button clicked:", mvmtClicks[mvmtClicks.length - 1]);
 }
 
 function serverAlgorithm(current_coordinates){
@@ -117,11 +114,11 @@ while (iterations < 100000000000) {
         console.log(NewWall);
     });
 
-    plot(wallCoordinate)
+    plot(wallCoordinate, modeType)
   }
   else{
     NewWall = false;
-    plot(wallCoordinate)
+    plot(wallCoordinate, modeType)
     app.get("/", (req, res) => {
       // Send left_following along with nextDirection
         res.json({newWall: NewWall });
