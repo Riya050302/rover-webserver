@@ -117,7 +117,7 @@ function serverAlgorithm(current_coordinates){
   }
   else{
     NewWall = false;
-    plot(wallCoordinate, modeType)
+  //  plot(wallCoordinate, modeType)
     app.get("/", (req, res) => {
       // Send left_following along with nextDirection
         res.json({newWall: NewWall });
