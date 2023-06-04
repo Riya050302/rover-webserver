@@ -14,7 +14,7 @@ let current_coordinates;
 let coordinates = []; // Empty array for coordinates
 let walls_plotted = []; 
 let NewWall = "false";
-let wall_detection;
+let wall_detection = "false";
 let maze_complete = "false";
 let roverCoordinates = null;
 let roverWallDetection = null; 
@@ -93,9 +93,9 @@ function serverAlgorithm(current_coordinates){
 
 
   app.post("/wallDetection", (req, res) => {
-    const {recieved_walldetection } = req.body; // Extract the coordinates from the request body
-    console.log("Received wall detection:", recieved_walldetection); // Log the received coordinates // You can perform any necessary processing with the coordinates here
-    wall_detection = recieved_walldetection;   
+    const {received_coordinates } = req.body; // Extract the coordinates from the request body
+    console.log("Received wall detection:", received_walldetection); // Log the received coordinates // You can perform any necessary processing with the coordinates here
+    wall_detection = received_walldetection;   
     res.sendStatus(200); // Send a success status code (200)
   });
 
