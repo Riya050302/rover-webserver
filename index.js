@@ -85,7 +85,7 @@ function serverAlgorithm(current_coordinates){
     coordinates.push(received_coordinates);
     console.log("Updated Array of coordinates:", coordinates);
     
-    const nums = received_coordinates.slice(1, -1).split(', ').map(Number);
+    const nums = received_coordinates.slice(1, -1).split(',').map(Number);
     const xwall = nums[0] + constant;
     const ywall = nums[1] + constant;
     wallCoordinate = `[${xwall},${ywall}]`;
