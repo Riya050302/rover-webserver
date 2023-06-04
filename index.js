@@ -94,6 +94,7 @@ function serverAlgorithm(current_coordinates){
       // For example, you can send a Bad Request status code (400)
       res.sendStatus(400);
       return;
+    }
     res.sendStatus(200); // Send a success status code (200)
   });
 
