@@ -84,7 +84,7 @@ function serverAlgorithm(current_coordinates){
     console.log("Received coordinates:", received_coordinates); // Log the received coordinates // You can perform any necessary processing with the coordinates here
     coordinates.push(received_coordinates);
     console.log("Updated Array of coordinates:", coordinates);
-    current_coordinates = typeof received_coordinates === 'string' ? received_coordinates.split(",").map(coord => parseInt(coord.trim())) : [];
+    current_coordinates = typeof received_coordinates === 'string' ?  [] : received_coordinates.split(",").map(coord => parseInt(coord.trim()));
     wallCoordinate = current_coordinates.map(coord => coord + constant);
     console.log("Split:",current_coordinates );
     console.log("wallCoordinate:",wallCoordinate);
