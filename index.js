@@ -85,7 +85,15 @@ function serverAlgorithm(current_coordinates){
     coordinates.push(received_coordinates);
     console.log("Updated Array of coordinates:", coordinates);
     
-    const nums = received_coordinates.slice(1, -1).split(',').map(Number);
+    let nums;
+    if (typeof received_coordinates === 'string') {
+      nums = received_coordinates.slice(1, -1).split(', ').map(Number);
+    } else if (Array.isArray(received_coordinates)) {
+      nums = received_coordinates.map(Number);
+    } else {
+      console.log("Invalid data type for received_coordinates.");
+    }    
+    //const nums = received_coordinates.slice(1, -1).split(',').map(Number);
     const xwall = nums[0] + constant;
     const ywall = nums[1] + constant;
     wallCoordinate = `[${xwall},${ywall}]`;
