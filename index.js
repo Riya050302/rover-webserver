@@ -19,9 +19,8 @@ let maze_complete = false;
 let roverCoordinates = null;
 let roverWallDetection = null; 
 let wallCoordinate = null;
-let constant = null;
+let constant = 5;
 var modeType;
-
 
 
 
@@ -76,7 +75,6 @@ function serverAlgorithm(current_coordinates){
   return right; // Use the right variable in your code
 }
 
-
   //================FOR ESP32=========================================================
     //POST REQUEST (ESP32)==============================================================
 
@@ -102,8 +100,7 @@ function serverAlgorithm(current_coordinates){
   });
 
 
-  app.get("/direction", (req, res) => {
-    console.log('direction:');
+  app.get("/nextDirection", (req, res) => {
     if (wall_detection && !walls_plotted.includes(wallCoordinate)) {
       walls_plotted.push(wallCoordinate);
       NewWall = true;
