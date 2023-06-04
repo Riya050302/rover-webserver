@@ -79,7 +79,7 @@ function serverAlgorithm(current_coordinates){
     //POST REQUEST (ESP32)==============================================================
 
   app.post("/roverCoordinatePost", (req, res) => {
-
+    const { received_coordinates } = req.body;
     console.log("Received coordinates:", received_coordinates);
 
     const parsedCoordinates = received_coordinates.split(",").map(coord => parseInt(coord.trim()));
