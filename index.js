@@ -103,10 +103,11 @@ function serverAlgorithm(current_coordinates){
 
 
   app.get("/direction", (req, res) => {
+    console.log('direction:');
     if (wall_detection && !walls_plotted.includes(wallCoordinate)) {
       walls_plotted.push(wallCoordinate);
       NewWall = true;
-   //   plot(wallCoordinate, modeType);
+      plot(wallCoordinate, modeType);
     } else {
       NewWall = false;
       direction = serverAlgorithm(current_coordinates);
