@@ -93,7 +93,7 @@ function serverAlgorithm(current_coordinates){
 
 
   app.post("/wallDetection", (req, res) => {
-    const {received_coordinates } = req.body; // Extract the coordinates from the request body
+    const {received_walldetection } = req.body; // Extract the coordinates from the request body
     console.log("Received wall detection:", received_walldetection); // Log the received coordinates // You can perform any necessary processing with the coordinates here
     wall_detection = received_walldetection;   
     res.sendStatus(200); // Send a success status code (200)
