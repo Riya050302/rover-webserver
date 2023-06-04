@@ -81,15 +81,15 @@ function serverAlgorithm(current_coordinates){
     //POST REQUEST (ESP32)==============================================================
 
   app.post("/roverCoordinatePost", (req, res) => {
+
     const { received_coordinates } = req.body; // Extract the coordinates from the request body
     console.log("Received coordinates:", received_coordinates); // Log the received coordinates // You can perform any necessary processing with the coordinates here
-    current_coordinates = received_coordinates;   
-    // Check if the maze is complete based on the received coordinates
-    // Set the mazeComplete flag accordingly
-    coordinates = coordinates.concat(current_coordinates);
-    console.log("Updated coordinates:", coordinates);
-    const parsedCoordinates = received_coordinates.split(",").map(coord => parseInt(coord.trim()));
-    wallCoordinate = parsedCoordinates.map(coord => coord + constant);
+    coordinates.push(received_coordinates);
+    console.log("Updated Array of coordinates:", coordinates);
+
+    current_coordinates = received_coordinates.split(",").map(coord => parseInt(coord.trim()));
+    wallCoordinate = current_coordinates.map(coord => coord + constant);
+
     res.sendStatus(200); // Send a success status code (200)
   });
 
@@ -101,36 +101,25 @@ function serverAlgorithm(current_coordinates){
     res.sendStatus(200); // Send a success status code (200)
   });
 
+
+  app.get("/direction", (req, res) => {
+    if (wall_detection && !walls_plotted.includes(wallCoordinate)) {
+      walls_plotted.push(wallCoordinate);
+      NewWall = true;
+   //   plot(wallCoordinate, modeType);
+    } else {
+      NewWall = false;
+      direction = serverAlgorithm(current_coordinates);
+      res.json({ Direction: direction });
+      console.log('direction:', direction);
+      plot(wallCoordinate, modeType);
+    }
+  });
   
-  if (wall_detection && !walls_plotted.includes(wallCoordinate)) {
-    walls_plotted = walls_plotted.concat(wallCoordinate);
-    NewWall = true;
-    //GET REQUEST (ESP32)===============================================================
-    app.get("/", (req, res) => {
-      // Send left_following along with nextDirection
-        res.json({newWall: NewWall });
-        console.log(NewWall);
-    });
-
-    plot(wallCoordinate, modeType)
-  }
-  else{
-    NewWall = false;
-   // plot(wallCoordinate, modeType)
-    app.get("/", (req, res) => {
-      // Send left_following along with nextDirection
-        res.json({newWall: NewWall });
-        console.log(NewWall);
-    });
-
-    direction = serverAlgorithm(current_coordinates)
-
-    app.get("/", (req, res) => {
-      // Send left_following along with nextDirection
-        res.json({Direction: direction });
-        console.log(direction);
-    });
-  }
+  app.get("/newWall", (req, res) => {
+    res.json({ newWall: NewWall });
+    console.log('NewWall:', NewWall);
+  });
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`); // Start the server and log the port it's listening on
