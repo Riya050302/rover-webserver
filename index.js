@@ -14,7 +14,7 @@ let current_coordinates;
 let coordinates = []; // Empty array for coordinates
 let walls_plotted = []; 
 let NewWall = "false";
-let wall_detection = "false";
+let wall_detection;
 let maze_complete = "false";
 let roverCoordinates = null;
 let roverWallDetection = null; 
