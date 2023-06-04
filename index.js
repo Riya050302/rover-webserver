@@ -79,18 +79,21 @@ function serverAlgorithm(current_coordinates){
     //POST REQUEST (ESP32)==============================================================
 
   app.post("/roverCoordinatePost", (req, res) => {
-    const { received_coordinates } = req.body;
-    console.log("Received coordinates:", received_coordinates);
 
-    const parsedCoordinates = received_coordinates.split(",").map(coord => parseInt(coord.trim()));
-    coordinates.push(...parsedCoordinates);
+    const { received_coordinates } = req.body; // Extract the coordinates from the request body
+    console.log("Received coordinates:", received_coordinates); // Log the received coordinates // You can perform any necessary processing with the coordinates here
+    coordinates.push(received_coordinates);
     console.log("Updated Array of coordinates:", coordinates);
-    
-    current_coordinates = parsedCoordinates;
+    current_coordinates = typeof received_coordinates === 'string' ? received_coordinates.split(",").map(coord => parseInt(coord.trim())) : [];
     wallCoordinate = current_coordinates.map(coord => coord + constant);
-    console.log("Split:", current_coordinates);
-    console.log("wallCoordinate:", wallCoordinate);
-    
+    console.log("Split:",current_coordinates );
+    console.log("wallCoordinate:",wallCoordinate);
+    if (typeof received_coordinates !== 'string') {
+      // Handle the case when received_coordinates is not a string
+      // Return an appropriate response or send an error status code
+      // For example, you can send a Bad Request status code (400)
+      res.sendStatus(400);
+      return;
     res.sendStatus(200); // Send a success status code (200)
   });
 
