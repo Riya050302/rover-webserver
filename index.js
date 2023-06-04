@@ -86,7 +86,8 @@ function serverAlgorithm(current_coordinates){
     console.log("Updated Array of coordinates:", coordinates);
     current_coordinates = typeof received_coordinates === 'string' ? received_coordinates.split(",").map(coord => parseInt(coord.trim())) : [];
     wallCoordinate = current_coordinates.map(coord => coord + constant);
-
+    console.log("Split:",current_coordinates );
+    console.log("wallCoordinate:",wallCoordinate);
     res.sendStatus(200); // Send a success status code (200)
   });
 
