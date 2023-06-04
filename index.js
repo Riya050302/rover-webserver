@@ -13,9 +13,9 @@ let iterations = 0
 let current_coordinates;
 let coordinates = []; // Empty array for coordinates
 let walls_plotted = []; 
-let NewWall = false;
-let wall_detection = false;
-let maze_complete = false;
+let NewWall = "false";
+let wall_detection = "false";
+let maze_complete = "false";
 let roverCoordinates = null;
 let roverWallDetection = null; 
 let wallCoordinate = null;
@@ -101,12 +101,12 @@ function serverAlgorithm(current_coordinates){
 
 
   app.get("/nextDirection", (req, res) => {
-    if (wall_detection && !walls_plotted.includes(wallCoordinate)) {
+    if (wall_detection == "true" && !walls_plotted.includes(wallCoordinate)) {
       walls_plotted.push(wallCoordinate);
-      NewWall = true;
+      NewWall = "true";
       plot(wallCoordinate, modeType);
     } else {
-      NewWall = false;
+      NewWall = "false";
       direction = serverAlgorithm(current_coordinates);
       res.json({ Direction: direction });
       console.log('direction:', direction);
