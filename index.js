@@ -80,14 +80,17 @@ function serverAlgorithm(current_coordinates){
 
   app.post("/roverCoordinatePost", (req, res) => {
 
-    const { received_coordinates } = req.body; // Extract the coordinates from the request body
-    console.log("Received coordinates:", received_coordinates); // Log the received coordinates // You can perform any necessary processing with the coordinates here
-    coordinates.push(received_coordinates);
+    console.log("Received coordinates:", received_coordinates);
+
+    const parsedCoordinates = received_coordinates.split(",").map(coord => parseInt(coord.trim()));
+    coordinates.push(...parsedCoordinates);
     console.log("Updated Array of coordinates:", coordinates);
-    current_coordinates = typeof received_coordinates === 'string' ? received_coordinates.split(",").map(coord => parseInt(coord.trim())) : [];
+    
+    current_coordinates = parsedCoordinates;
     wallCoordinate = current_coordinates.map(coord => coord + constant);
-    console.log("Split:",current_coordinates );
-    console.log("wallCoordinate:",wallCoordinate);
+    console.log("Split:", current_coordinates);
+    console.log("wallCoordinate:", wallCoordinate);
+    
     res.sendStatus(200); // Send a success status code (200)
   });
 
