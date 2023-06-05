@@ -21,6 +21,7 @@ let roverWallDetection = null;
 let wallCoordinate = null;
 let constant = 5;
 var modeType;
+let mvmtClicks = []; // Array to store button click data
 
 
 
@@ -36,7 +37,6 @@ function plot(coordinates, mode) {
   });
 
   //POST REQUEST (Client Laptop)======================================================
-  let mvmtClicks = []; // Array to store button click data
   app.post("/mvmtClickPost", (req, res) => {
     const { direction } = req.body; // Extract the direction from the request body
     console.log("Button clicked:", direction); // Log the clicked direction
