@@ -29,16 +29,17 @@ let mvmtClicks = []; // Array to store button click data
     //================FOR CLIENT LAPTOP================================================
   //GET REQUEST (Client Laptop)======================================================
   app.get("/numericalInput", (req, res) => {
-    const coordinat = [];
+    const coordinates = [];
+    
     // Generate random coordinates and add them to the array
     for (let i = 0; i < 10; i++) {
       const x = Math.random() * 100; // Random X coordinate (0 to 100)
       const y = Math.random() * 100; // Random Y coordinate (0 to 100)
-      coordinat.push({ x, y }); // Add the coordinate to the array
+      coordinates.push({ x, y }); // Add the coordinate to the array
       console.log({ x, y });
     }
     
-    res.json({ coordinat }); // Send the coordinates array as a single response
+    res.json({ coordinates }); // Send the coordinates array as a single response
   });
 
   //POST REQUEST (Client Laptop)======================================================
@@ -66,6 +67,7 @@ let mvmtClicks = []; // Array to store button click data
 
   app.post("/setManualMode", (req, res) => {
     const { mode } = req.body; // Extract the mode from the request body
+
     modeType = mode; // Update the manual mode flag
     console.log("Mode:", mode);
     res.sendStatus(200); // Send a success status code (200)
