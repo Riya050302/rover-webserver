@@ -42,10 +42,10 @@ function plot(coordinates, mode) {
     console.log("Button clicked:", direction); // Log the clicked direction
 
     mvmtClicks.push(direction); // Add the clicked direction to the buttonClicks array
-
+    console.log(mvmtClicks);
     setTimeout(function(){
       const removedElement = mvmtClicks.pop();
-      //console.log(removedElement);
+      console.log(removedElement);
       //console.log("Delayed by 2 seconds");
     }, 5000);
 
