@@ -83,7 +83,7 @@ function serverAlgorithm(current_coordinates){
     const { received_coordinates } = req.body; // Extract the coordinates from the request body
     console.log("Received coordinates:", received_coordinates); // Log the received coordinates // You can perform any necessary processing with the coordinates here
     coordinates.push(received_coordinates);
-    console.log("Updated Array of coordinates:", coordinates);
+    //console.log("Updated Array of coordinates:", coordinates);
     
     let nums;
     if (typeof received_coordinates === 'string') {
@@ -120,7 +120,8 @@ function serverAlgorithm(current_coordinates){
       plot(wallCoordinate, modeType);
     } else {
       NewWall = "false";
-      direction = serverAlgorithm(current_coordinates);
+      //direction = serverAlgorithm(current_coordinates);
+      direction = mvmtClicks.pop()
       res.json({ Direction: direction });
       console.log('direction:', direction);
       plot(wallCoordinate, modeType);
