@@ -41,11 +41,11 @@ function plot(coordinates, mode) {
     const { direction } = req.body; // Extract the direction from the request body
     console.log("Button clicked:", direction); // Log the clicked direction
 
-    mvmtClicks.push(direction); // Add the clicked direction to the buttonClicks array
-    console.log(mvmtClicks);
+    //mvmtClicks.push(direction); // Add the clicked direction to the buttonClicks array
+    //console.log(mvmtClicks);
     setTimeout(function(){
-      const removedElement = mvmtClicks.pop();
-      console.log(removedElement);
+      //const removedElement = mvmtClicks.pop();
+      //console.log(removedElement);
       //console.log("Delayed by 2 seconds");
     }, 5000);
 
