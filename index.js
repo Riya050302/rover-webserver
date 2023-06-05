@@ -29,11 +29,17 @@ function plot(coordinates, mode) {
     //================FOR CLIENT LAPTOP================================================
   //GET REQUEST (Client Laptop)======================================================
   app.get("/numericalInput", (req, res) => {
-    var numericalInput = 70; // Replace with your desired numerical input
-
-    res.json({
-      numericalInput: numericalInput,
-    });
+    const coordinates = [];
+  
+    // Generate random coordinates and add them to the array
+    for (let i = 0; i < 10; i++) {
+      const x = Math.random() * 100; // Random X coordinate (0 to 100)
+      const y = Math.random() * 100; // Random Y coordinate (0 to 100)
+      coordinates.push({ x, y }); // Add the coordinate to the array
+      console.log({ x, y });
+    }
+    
+    res.json({ coordinates }); // Send the coordinates array as a single response
   });
 
   //POST REQUEST (Client Laptop)======================================================
