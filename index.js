@@ -20,6 +20,8 @@ let roverCoordinates = null;
 let roverWallDetection = null; 
 let wallCoordinate = null;
 let constant = 5;
+let x = 2;
+let y = 3;
 var modeType;
 let mvmtClicks = []; // Array to store button click data
 
@@ -30,14 +32,9 @@ let mvmtClicks = []; // Array to store button click data
   //GET REQUEST (Client Laptop)======================================================
   app.get("/numericalInput", (req, res) => {
     const coordinates = [];
-    
     // Generate random coordinates and add them to the array
-    for (let i = 0; i < 10; i++) {
-      const x = Math.random() * 100; // Random X coordinate (0 to 100)
-      const y = Math.random() * 100; // Random Y coordinate (0 to 100)
       coordinates.push({ x, y }); // Add the coordinate to the array
       console.log({ x, y });
-    }
     
     res.json({ coordinates }); // Send the coordinates array as a single response
   });
@@ -99,6 +96,8 @@ function serverAlgorithm(current_coordinates){
     } else {
       console.log("Invalid data type for received_coordinates.");
     }    
+    x = nums[0];
+    y = nums[1];
     //const nums = received_coordinates.slice(1, -1).split(',').map(Number);
     const xwall = nums[0] + constant;
     const ywall = nums[1] + constant;
