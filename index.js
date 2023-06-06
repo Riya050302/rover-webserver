@@ -124,9 +124,10 @@ function serverAlgorithm(received_coordinates){
       direction = mvmtClicks.pop()
       res.json({ Direction: direction });
       console.log('direction:', direction);
+      plot = true
+      console.log('plot', plot);
     //  plot(x,y, modeType);
     }
-    plot = true
   });
   
   app.get("/newWall", (req, res) => {
