@@ -115,14 +115,14 @@ function serverAlgorithm(received_coordinates){
     if (wall_detection == "true" && !walls_plotted.includes(wallCoordinate)) {
       walls_plotted.push(wallCoordinate);
       NewWall = "true";
-      plot(wallCoordinate, modeType);
+    //  plot(wallCoordinate, modeType);
     } else {
       NewWall = "false";
       //direction = serverAlgorithm(current_coordinates);
       direction = mvmtClicks.pop()
       res.json({ Direction: direction });
       console.log('direction:', direction);
-      plot(x,y, modeType);
+    //  plot(x,y, modeType);
     }
   });
   
