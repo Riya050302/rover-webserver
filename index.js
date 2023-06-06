@@ -9,15 +9,11 @@ app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // Parse incoming JSON data
 
 //new variables 
-let iterations = 0
-let current_coordinates;
 let coordinates = []; // Empty array for coordinates
 let walls_plotted = []; 
 let NewWall = "false";
 let wall_detection = "false";
 let maze_complete = "false";
-let roverCoordinates = null;
-let roverWallDetection = null; 
 let wallCoordinate = null;
 let constant = 5;
 let x = 2;
@@ -25,13 +21,10 @@ let y = 3;
 var modeType;
 let mvmtClicks = []; // Array to store button click data
 
-
-
-//function plot(coordinates, mode) {
+function plot(x,y, mode) {
     //================FOR CLIENT LAPTOP================================================
   //GET REQUEST (Client Laptop)======================================================
   app.get("/numericalInput", (req, res) => {
-    const coordinates = [];
     // Generate random coordinates and add them to the array
       coordinates.push({ x, y }); // Add the coordinate to the array
       console.log({ x, y });
@@ -70,9 +63,9 @@ let mvmtClicks = []; // Array to store button click data
     res.sendStatus(200); // Send a success status code (200)
   });
 
-//}
+}
 
-function serverAlgorithm(current_coordinates){
+function serverAlgorithm(received_coordinates){
   let right = "right"; // Declare and assign a value to the right variable
 
   return right; // Use the right variable in your code
@@ -85,7 +78,7 @@ function serverAlgorithm(current_coordinates){
 
     const { received_coordinates } = req.body; // Extract the coordinates from the request body
     console.log("Received coordinates:", received_coordinates); // Log the received coordinates // You can perform any necessary processing with the coordinates here
-    coordinates.push(received_coordinates);
+    //coordinates.push(received_coordinates);
     //console.log("Updated Array of coordinates:", coordinates);
     
     let nums;
@@ -129,7 +122,7 @@ function serverAlgorithm(current_coordinates){
       direction = mvmtClicks.pop()
       res.json({ Direction: direction });
       console.log('direction:', direction);
-      plot(wallCoordinate, modeType);
+      plot(x,y, modeType);
     }
   });
   
