@@ -40,7 +40,7 @@ if (plot === true){
       console.log("Button clicked:", direction); // Log the clicked direction
 
       mvmtClicks.unshift(direction); // Add the clicked direction to the buttonClicks array
-      //console.log(mvmtClicks);
+      console.log(mvmtClicks);
       setTimeout(function(){
         //const removedElement = mvmtClicks.pop();
         //console.log(removedElement);
