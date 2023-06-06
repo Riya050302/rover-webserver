@@ -125,7 +125,7 @@ function serverAlgorithm(received_coordinates){
       direction = mvmtClicks.pop()
       res.json({ Direction: direction });
       console.log('direction:', direction);
-      //plot()
+      plot()
     //  plot(x,y, modeType);
     }
   });
