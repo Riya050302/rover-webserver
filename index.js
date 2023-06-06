@@ -22,7 +22,7 @@ var modeType;
 let mvmtClicks = []; // Array to store button click data
 let plot = "false"
 
-if (plot = "true"){
+if (plot === "true"){
       //================FOR CLIENT LAPTOP================================================
     //GET REQUEST (Client Laptop)======================================================
     app.get("/numericalInput", (req, res) => {
