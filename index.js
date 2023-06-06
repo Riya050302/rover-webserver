@@ -20,7 +20,6 @@ let x = 2;
 let y = 3;
 var modeType;
 let mvmtClicks = []; // Array to store button click data
-let plot = false
 
 
 function plot(){
