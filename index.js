@@ -20,49 +20,51 @@ let x = 2;
 let y = 3;
 var modeType;
 let mvmtClicks = []; // Array to store button click data
+let plot = "false"
 
-
-    //================FOR CLIENT LAPTOP================================================
-  //GET REQUEST (Client Laptop)======================================================
-  app.get("/numericalInput", (req, res) => {
-    // Generate random coordinates and add them to the array
-      coordinates.push({ x, y }); // Add the coordinate to the array
-      console.log({ x, y });
-    
-    res.json({ coordinates }); // Send the coordinates array as a single response
-  });
-
-  //POST REQUEST (Client Laptop)======================================================
-  app.post("/mvmtClickPost", (req, res) => {
-    const { direction } = req.body; // Extract the direction from the request body
-    console.log("Button clicked:", direction); // Log the clicked direction
-
-    mvmtClicks.unshift(direction); // Add the clicked direction to the buttonClicks array
-    //console.log(mvmtClicks);
-    setTimeout(function(){
-      //const removedElement = mvmtClicks.pop();
-      //console.log(removedElement);
-      //console.log("Delayed by 2 seconds");
-    }, 5000);
-
-    res.sendStatus(200); // Send a success status code (200)
-  });
-
-  app.get("/mvmtClicks", (req, res) => {
-    res.json({
-      mvmtClicks: mvmtClicks, // Return the buttonClicks array as JSON response
+if (plot = "true"){
+      //================FOR CLIENT LAPTOP================================================
+    //GET REQUEST (Client Laptop)======================================================
+    app.get("/numericalInput", (req, res) => {
+      // Generate random coordinates and add them to the array
+        coordinates.push({ x, y }); // Add the coordinate to the array
+        console.log({ x, y });
+      
+      res.json({ coordinates }); // Send the coordinates array as a single response
+      plot = "false"
     });
-  });
+
+    //POST REQUEST (Client Laptop)======================================================
+    app.post("/mvmtClickPost", (req, res) => {
+      const { direction } = req.body; // Extract the direction from the request body
+      console.log("Button clicked:", direction); // Log the clicked direction
+
+      mvmtClicks.unshift(direction); // Add the clicked direction to the buttonClicks array
+      //console.log(mvmtClicks);
+      setTimeout(function(){
+        //const removedElement = mvmtClicks.pop();
+        //console.log(removedElement);
+        //console.log("Delayed by 2 seconds");
+      }, 5000);
+
+      res.sendStatus(200); // Send a success status code (200)
+    });
+
+    app.get("/mvmtClicks", (req, res) => {
+      res.json({
+        mvmtClicks: mvmtClicks, // Return the buttonClicks array as JSON response
+      });
+    });
 
 
-  app.post("/setManualMode", (req, res) => {
-    const { mode } = req.body; // Extract the mode from the request body
+    app.post("/setManualMode", (req, res) => {
+      const { mode } = req.body; // Extract the mode from the request body
 
-    modeType = mode; // Update the manual mode flag
-    console.log("Mode:", mode);
-    res.sendStatus(200); // Send a success status code (200)
-  });
-
+      modeType = mode; // Update the manual mode flag
+      console.log("Mode:", mode);
+      res.sendStatus(200); // Send a success status code (200)
+    });
+  }
 
 
 function serverAlgorithm(received_coordinates){
@@ -118,6 +120,7 @@ function serverAlgorithm(received_coordinates){
     //  plot(wallCoordinate, modeType);
     } else {
       NewWall = "false";
+      plot = "true"
       //direction = serverAlgorithm(current_coordinates);
       direction = mvmtClicks.pop()
       res.json({ Direction: direction });
