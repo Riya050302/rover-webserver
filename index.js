@@ -20,18 +20,19 @@ let x = 2;
 let y = 3;
 var modeType;
 let mvmtClicks = []; // Array to store button click data
-let plot = false
 
-if (plot === true){
+
+function plot(){
       //================FOR CLIENT LAPTOP================================================
+      console.log(plot);
     //GET REQUEST (Client Laptop)======================================================
     app.get("/numericalInput", (req, res) => {
       // Generate random coordinates and add them to the array
         coordinates.push({ x, y }); // Add the coordinate to the array
         console.log({ x, y });
+        console.log(plot);
       
       res.json({ coordinates }); // Send the coordinates array as a single response
-      plot = "false"
     });
 
     //POST REQUEST (Client Laptop)======================================================
@@ -124,8 +125,7 @@ function serverAlgorithm(received_coordinates){
       direction = mvmtClicks.pop()
       res.json({ Direction: direction });
       console.log('direction:', direction);
-      plot = true
-      console.log('plot', plot);
+      //plot()
     //  plot(x,y, modeType);
     }
   });
