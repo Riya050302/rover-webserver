@@ -120,7 +120,7 @@ function serverAlgorithm(received_coordinates){
     //  plot(wallCoordinate, modeType);
     } else {
       NewWall = "false";
-      plot = "true"
+      plot = "false"
       //direction = serverAlgorithm(current_coordinates);
       direction = mvmtClicks.pop()
       res.json({ Direction: direction });
