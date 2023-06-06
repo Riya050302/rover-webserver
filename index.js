@@ -21,7 +21,7 @@ let y = 3;
 var modeType;
 let mvmtClicks = []; // Array to store button click data
 
-function plot(x,y, mode) {
+
     //================FOR CLIENT LAPTOP================================================
   //GET REQUEST (Client Laptop)======================================================
   app.get("/numericalInput", (req, res) => {
@@ -63,7 +63,7 @@ function plot(x,y, mode) {
     res.sendStatus(200); // Send a success status code (200)
   });
 
-}
+
 
 function serverAlgorithm(received_coordinates){
   let right = "right"; // Declare and assign a value to the right variable
