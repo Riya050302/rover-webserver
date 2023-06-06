@@ -22,9 +22,8 @@ var modeType;
 let mvmtClicks = []; // Array to store button click data
 let plot = false
 
-console.log('plot', plot);
 
-if (plot === true){
+function plot(){
       //================FOR CLIENT LAPTOP================================================
       console.log(plot);
     //GET REQUEST (Client Laptop)======================================================
@@ -127,7 +126,7 @@ function serverAlgorithm(received_coordinates){
       direction = mvmtClicks.pop()
       res.json({ Direction: direction });
       console.log('direction:', direction);
-      plot = true
+      plot()
     //  plot(x,y, modeType);
     }
   });
