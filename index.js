@@ -20,9 +20,9 @@ let x = 2;
 let y = 3;
 var modeType;
 let mvmtClicks = []; // Array to store button click data
-let plot = "false"
+let plot = false
 
-if (plot === "true"){
+if (plot === true){
       //================FOR CLIENT LAPTOP================================================
     //GET REQUEST (Client Laptop)======================================================
     app.get("/numericalInput", (req, res) => {
@@ -120,7 +120,7 @@ function serverAlgorithm(received_coordinates){
     //  plot(wallCoordinate, modeType);
     } else {
       NewWall = "false";
-      plot = "true"
+      plot = true
       //direction = serverAlgorithm(current_coordinates);
       direction = mvmtClicks.pop()
       res.json({ Direction: direction });
