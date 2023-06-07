@@ -107,7 +107,6 @@ function serverAlgorithm(received_coordinates){
     res.sendStatus(200); // Send a success status code (200)
   });
 
-
   //app.post("/wallDetection", (req, res) => {
   //  const {received_walldetection } = req.body; // Extract the coordinates from the request body
   //  console.log("Received wall detection:", received_walldetection); // Log the received coordinates // You can perform any necessary processing with the coordinates here
@@ -116,9 +115,6 @@ function serverAlgorithm(received_coordinates){
   //});
 
   app.get("/nextDirectionAndNewWall", (req, res) => {
-    res.json({ Direction: direction, NewWall: NewWall });
-    console.log('Direction:', direction);
-    console.log('NewWall:', NewWall);
     if (wall_detection === "true" && !walls_plotted.includes(wallCoordinate)) {
       walls_plotted.push(wallCoordinate);
       NewWall = "true";
@@ -127,6 +123,9 @@ function serverAlgorithm(received_coordinates){
       direction = mvmtClicks.pop();
       plot();
     }
+    res.json({ Direction: direction, NewWall: NewWall });
+    console.log('Direction:', direction);
+    console.log('NewWall:', NewWall);
   });
   
 
