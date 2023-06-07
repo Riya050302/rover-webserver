@@ -113,22 +113,6 @@ function serverAlgorithm(received_coordinates){
     res.sendStatus(200); // Send a success status code (200)
   });
 
-//  app.get("/nextDirectionAndNewWall", (req, res) => {
-//  if (wall_detection === "true" && !walls_plotted.includes(wallCoordinate)) {
-//    walls_plotted.push(wallCoordinate);
-//    NewWall = "true";
-//  } else {
-//    NewWall = "false";
-//    direction = mvmtClicks.pop();
-//    res.json({ Direction: direction, NewWall: NewWall });
-//    console.log('Direction:', direction);
-//    console.log('NewWall:', NewWall);
-//    plot();
-//  }
-//});
-
-
-
   app.get("/nextDirection", (req, res) => {
     if (wall_detection == "true" && !walls_plotted.includes(wallCoordinate)) {
       walls_plotted.push(wallCoordinate);
@@ -137,9 +121,9 @@ function serverAlgorithm(received_coordinates){
     } else {
       NewWall = "false";
       //direction = serverAlgorithm(current_coordinates);
-      if (mvmtClicks.length > 0){
+     // if (mvmtClicks.length > 0){
         direction = mvmtClicks.pop()
-      }
+    //  }
       res.json({ Direction: direction });
       console.log('direction:', direction);
       plot()
