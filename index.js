@@ -79,7 +79,7 @@ function serverAlgorithm(received_coordinates){
 
   app.post("/roverCoordinateandWallDetection", (req, res) => {
     const { jsonPacket } = req.body; // Extract the coordinates from the request body
-    //console.log("data:", jsonPacket); // Log the received coordinates // You can perform any necessary processing with the coordinates here
+    console.log("data:", jsonPacket); // Log the received coordinates // You can perform any necessary processing with the coordinates here
     //coordinates.push(received_coordinates);
     //console.log("Updated Array of coordinates:", coordinates);
     const data = JSON.parse(jsonPacket);
