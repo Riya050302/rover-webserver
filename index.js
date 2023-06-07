@@ -78,16 +78,14 @@ function serverAlgorithm(received_coordinates){
     //POST REQUEST (ESP32)==============================================================
 
   app.post("/roverCoordinateandWallDetection", (req, res) => {
-    const { jsonPacket } = req.body; // Extract the coordinates from the request body
-    console.log("data:", jsonPacket); // Log the received coordinates // You can perform any necessary processing with the coordinates here
-    //coordinates.push(received_coordinates);
-    //console.log("Updated Array of coordinates:", coordinates);
-    const data = JSON.parse(jsonPacket);
-    const received_coordinates = data.received_coordinates;
-    const wall_detection = data.received_walldetection;
-
-    console.log("wall detection:", wall_detection ); // Output: 30
-    console.log("received_coordinates:", received_coordinates); // Output: New York
+     const { jsonPacket } = req.body; // Extract the coordinates from the request body
+      console.log("data:", jsonPacket); // Log the received coordinates // You can perform any necessary processing with the coordinates here
+    
+      const received_coordinates = jsonPacket.received_coordinates;
+      const wall_detection = jsonPacket.received_walldetection;
+    
+      console.log("wall detection:", wall_detection);
+      console.log("received_coordinates:", received_coordinates);
     let nums;
     if (typeof received_coordinates === 'string') {
       nums = received_coordinates.slice(1, -1).split(', ').map(Number);
