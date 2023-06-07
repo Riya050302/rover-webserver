@@ -114,21 +114,20 @@ function serverAlgorithm(received_coordinates){
   });
 
   app.get("/nextDirectionAndNewWall", (req, res) => {
-  let lastIndex = mvmtClicks.length - 1;
   if (wall_detection === "true" && !walls_plotted.includes(wallCoordinate)) {
     walls_plotted.push(wallCoordinate);
     NewWall = "true";
   } else {
     NewWall = "false";
-    if (direction === "undefined"){
-      direction = lastIndex
-    }
+    direction = mvmtClicks.pop();
     res.json({ Direction: direction, NewWall: NewWall });
     console.log('Direction:', direction);
     console.log('NewWall:', NewWall);
     plot();
   }
 });
+
+
 
   app.get("/nextDirection", (req, res) => {
     if (wall_detection == "true" && !walls_plotted.includes(wallCoordinate)) {
@@ -138,7 +137,9 @@ function serverAlgorithm(received_coordinates){
     } else {
       NewWall = "false";
       //direction = serverAlgorithm(current_coordinates);
-      direction = mvmtClicks.pop()
+      if (mvmtClicks.length > 0){
+        direction = mvmtClicks.pop()
+      }
       res.json({ Direction: direction });
       console.log('direction:', direction);
       plot()
