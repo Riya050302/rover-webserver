@@ -119,7 +119,9 @@ function serverAlgorithm(received_coordinates){
     NewWall = "true";
   } else {
     NewWall = "false";
-    direction = mvmtClicks.pop();
+    if (mvmtClicks.length > 0) {
+      direction = mvmtClicks.pop();
+    }
     res.json({ Direction: direction, NewWall: NewWall });
     console.log('Direction:', direction);
     console.log('NewWall:', NewWall);
