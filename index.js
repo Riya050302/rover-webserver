@@ -18,10 +18,8 @@ let wallCoordinate = null;
 let constant = 5;
 let x = 2;
 let y = 3;
-let scale_factor = 2;
 var modeType;
 let mvmtClicks = []; // Array to store button click data
-let direction = null; // Initialize the direction variable
 
 
 function plot(){
@@ -39,10 +37,10 @@ function plot(){
 
     //POST REQUEST (Client Laptop)======================================================
     app.post("/mvmtClickPost", (req, res) => {
-      const { manual_direction } = req.body; // Extract the direction from the request body
+      const { direction } = req.body; // Extract the direction from the request body
       //console.log("Button clicked:", direction); // Log the clicked direction
 
-      mvmtClicks.unshift(manual_direction); // Add the clicked direction to the buttonClicks array
+      mvmtClicks.unshift(direction); // Add the clicked direction to the buttonClicks array
       //console.log(mvmtClicks);
       setTimeout(function(){
         //const removedElement = mvmtClicks.pop();
@@ -69,24 +67,13 @@ function plot(){
     });
   }
 
-function GridPosition(x, y) {
-    let grid_x = Math.ceil(x / scale_factor);
-    let grid_y = Math.ceil(y / scale_factor);
-    let grid_coordinate = "(" + String(grid_x) + "," + String(grid_y) + ")";
-    return grid_coordinate;
+
+function serverAlgorithm(received_coordinates){
+  let right = "right"; // Declare and assign a value to the right variable
+
+  return right; // Use the right variable in your code
 }
 
-function serverAlgorithm(x, y, wall_detection) {
-  //add dictionary 
-  let current_grid = GridPosition(x, y);
-  console.log(current_grid);
-  if (wall_detection === "True") {
-    direction = "left";
-  } else {
-    direction = "up";
-  }
-  return direction; // Use the right variable in your code
-}
   //================FOR ESP32=========================================================
     //POST REQUEST (ESP32)==============================================================
 
@@ -107,6 +94,14 @@ function serverAlgorithm(x, y, wall_detection) {
     }    
     x = nums[0];
     y = nums[1];
+    //const nums = received_coordinates.slice(1, -1).split(',').map(Number);
+    const xwall = nums[0] + constant;
+    const ywall = nums[1] + constant;
+    wallCoordinate = `[${xwall},${ywall}]`;
+    console.log(wallCoordinate); // Output: [xwall,ywall]
+    //current_coordinates = received_coordinates.split(",").map(coord => parseInt(coord.trim()));
+    //wallCoordinate = current_coordinates.map(coord => coord + constant);
+    console.log("wallCoordinate:",wallCoordinate);
     res.sendStatus(200); // Send a success status code (200)
   });
 
@@ -119,23 +114,31 @@ function serverAlgorithm(x, y, wall_detection) {
   });
 
   app.get("/nextDirection", (req, res) => {
-   if (modeType == "automatic") {
-     direction = serverAlgorithm(x, y, wall_detection)
-   } else {
-     direction = mvmtClicks.pop();
-   }
-   let current_grid = GridPosition(x, y);
-   console.log("CurrentGrid:", current_grid);
-   res.json({ Direction: direction });
-   console.log('direction:', direction);
-   plot()
+    if (wall_detection == "true" && !walls_plotted.includes(wallCoordinate)) {
+      walls_plotted.push(wallCoordinate);
+      NewWall = "true";
+    //  plot(wallCoordinate, modeType);
+    } else {
+      NewWall = "false";
+      //direction = serverAlgorithm(current_coordinates);
+     // if (mvmtClicks.length > 0){
+        direction = mvmtClicks.pop()
+    //  }
+      res.json({ Direction: direction });
+      console.log('direction:', direction);
+      plot()
+    //  plot(x,y, modeType);
+    }
+  });
+  
+  app.get("/newWall", (req, res) => {
+    res.json({ newWall: NewWall });
+    console.log('NewWall:', NewWall);
   });
 
-
-
- app.listen(PORT, () => {
-   console.log(`Server listening on port ${PORT}`); // Start the server and log the port it's listening on
- });
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`); // Start the server and log the port it's listening on
+});
 
   //app.get("/roverCoordinates", (req, res) => {
   //  res.json({

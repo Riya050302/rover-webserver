@@ -119,7 +119,7 @@ function serverAlgorithm(x, y, wall_detection) {
   });
 
   app.get("/nextDirection", (req, res) => {
-   if (mode == "automatic") {
+   if (modeType == "automatic") {
      direction = serverAlgorithm(x, y, wall_detection)
    } else {
      direction = mvmtClicks.pop();
