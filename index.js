@@ -25,13 +25,13 @@ let direction = null; // Initialize the direction variable
 
 function plot(){
       //================FOR CLIENT LAPTOP================================================
-      console.log(plot);
+    //  console.log(plot);
     //GET REQUEST (Client Laptop)======================================================
     app.get("/numericalInput", (req, res) => {
       // Generate random coordinates and add them to the array
         coordinates.push({ x, y }); // Add the coordinate to the array
-        console.log({ x, y });
-        console.log(plot);
+    //    console.log({ x, y });
+     //   console.log(plot);
       
       res.json({ coordinates }); // Send the coordinates array as a single response
     });
@@ -42,7 +42,7 @@ function plot(){
       //console.log("Button clicked:", direction); // Log the clicked direction
 
       mvmtClicks.unshift(direction); // Add the clicked direction to the buttonClicks array
-      //console.log(mvmtClicks);
+      console.log("Web detected:", mvmtClicks);
       setTimeout(function(){
         //const removedElement = mvmtClicks.pop();
         //console.log(removedElement);
@@ -63,7 +63,7 @@ function plot(){
       const { mode } = req.body; // Extract the mode from the request body
 
       modeType = mode; // Update the manual mode flag
-      console.log("Mode:", mode);
+      //console.log("Mode:", mode);
       res.sendStatus(200); // Send a success status code (200)
     });
   }
@@ -80,20 +80,20 @@ function serverAlgorithm(received_coordinates){
 
   app.post("/roverCoordinateandWallDetection", (req, res) => {
      const { jsonPacket } = req.body; // Extract the coordinates from the request body
-      console.log("data:", jsonPacket); // Log the received coordinates // You can perform any necessary processing with the coordinates here
+      //console.log("data:", jsonPacket); // Log the received coordinates // You can perform any necessary processing with the coordinates here
     
       const received_coordinates = jsonPacket.received_coordinates;
       const wall_detection = jsonPacket.received_walldetection;
     
-      console.log("wall detection:", wall_detection);
-      console.log("received_coordinates:", received_coordinates);
+      //console.log("wall detection:", wall_detection);
+      //console.log("received_coordinates:", received_coordinates);
     let nums;
     if (typeof received_coordinates === 'string') {
       nums = received_coordinates.slice(1, -1).split(', ').map(Number);
     } else if (Array.isArray(received_coordinates)) {    
       nums = received_coordinates.map(Number);
     } else {
-      console.log("Invalid data type for received_coordinates.");
+      //console.log("Invalid data type for received_coordinates.");
     }    
     x = nums[0];
     y = nums[1];
@@ -101,10 +101,10 @@ function serverAlgorithm(received_coordinates){
     const xwall = nums[0] + constant;
     const ywall = nums[1] + constant;
     wallCoordinate = `[${xwall},${ywall}]`;
-    console.log(wallCoordinate); // Output: [xwall,ywall]
+    //console.log(wallCoordinate); // Output: [xwall,ywall]
     //current_coordinates = received_coordinates.split(",").map(coord => parseInt(coord.trim()));
     //wallCoordinate = current_coordinates.map(coord => coord + constant);
-    console.log("wallCoordinate:",wallCoordinate);
+    //console.log("wallCoordinate:",wallCoordinate);
     res.sendStatus(200); // Send a success status code (200)
   });
 
@@ -118,8 +118,8 @@ function serverAlgorithm(received_coordinates){
 
   app.get("/nextDirectionAndNewWall", (req, res) => {
     res.json({ Direction: direction, NewWall: NewWall });
-    console.log('Direction:', direction);
-    console.log('NewWall:', NewWall);
+    console.log('ESP32 SENT Direction:', direction);
+   // console.log('NewWall:', NewWall);
     if (wall_detection === "true" && !walls_plotted.includes(wallCoordinate)) {
       walls_plotted.push(wallCoordinate);
       NewWall = "true";
