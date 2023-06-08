@@ -18,7 +18,7 @@ let wallCoordinate = null;
 let constant = 5;
 let x = 2;
 let y = 3;
-let scale_factor = 6
+let scale_factor = 2;
 var modeType;
 let mvmtClicks = []; // Array to store button click data
 let direction = null; // Initialize the direction variable
@@ -125,7 +125,7 @@ function serverAlgorithm(x, y, wall_detection) {
      direction = mvmtClicks.pop();
    }
    let current_grid = GridPosition(x, y);
-   console.log(current_grid);
+   console.log("CurrentGrid:", current_grid);
    res.json({ Direction: direction });
    console.log('direction:', direction);
    plot()
