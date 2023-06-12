@@ -10,12 +10,9 @@ app.use(express.json()); // Parse incoming JSON data
 
 //new variables 
 let coordinates = []; // Empty array for coordinates
-let walls_plotted = []; 
-let NewWall = "false";
 let wall_detection = "false";
 let maze_complete = "false";
-let wallCoordinate = null;
-let constant = 5;
+let traversedGrids = [];
 let x = 2;
 let y = 3;
 let scale_factor = 2;
@@ -80,12 +77,18 @@ function serverAlgorithm(x, y, wall_detection) {
   //add dictionary 
   let current_grid = GridPosition(x, y);
   console.log(current_grid);
-  if (wall_detection === "True") {
-    direction = "left";
+  traversedGrids.push(current_grid); 
+  if (wall_detection === "true" && !traversedGrids.includes(current_grid)) {
+    return "doleftwall"
   } else {
-    direction = "up";
+    if (wall_detection === "false"){
+      return "up"
+    }
+    else if (wall_detection === "true"){
+      return "right"
+    }
   }
-  return direction; // Use the right variable in your code
+  // Use the right variable in your code
 }
   //================FOR ESP32=========================================================
     //POST REQUEST (ESP32)==============================================================
