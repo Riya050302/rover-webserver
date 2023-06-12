@@ -102,7 +102,6 @@ function serverAlgorithm(received_coordinates){
     //current_coordinates = received_coordinates.split(",").map(coord => parseInt(coord.trim()));
     //wallCoordinate = current_coordinates.map(coord => coord + constant);
     console.log("wallCoordinate:",wallCoordinate);
-    plot()
     res.sendStatus(200); // Send a success status code (200)
   });
 
@@ -129,6 +128,7 @@ function serverAlgorithm(received_coordinates){
       console.log('direction:', direction);
     //  plot(x,y, modeType);
     }
+    plot()
   });
   
   app.get("/newWall", (req, res) => {
