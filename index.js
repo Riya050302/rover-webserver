@@ -126,9 +126,9 @@ function serverAlgorithm(received_coordinates){
     //  }
       res.json({ Direction: direction });
       console.log('direction:', direction);
-      plot()
     //  plot(x,y, modeType);
     }
+    plot()
   });
   
   app.get("/newWall", (req, res) => {
