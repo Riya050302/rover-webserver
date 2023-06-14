@@ -40,7 +40,7 @@ function plot(){
     app.post("/mvmtClickPost", (req, res) => {
       const { direction } = req.body; // Extract the direction from the request body
       //console.log("Button clicked:", direction); // Log the clicked direction
-
+      console.log("ri:", recalibrate);
       mvmtClicks.unshift(direction); // Add the clicked direction to the buttonClicks array
       //console.log(mvmtClicks);
       setTimeout(function(){
@@ -76,7 +76,6 @@ function plot(){
     res.sendStatus(200); // Send a success status code (200)
   });
 
-  console.log("ri:", recalibrate);
 
   app.get("/recalibrate", (req, res) => {
     res.json({
