@@ -70,8 +70,8 @@ function plot(){
   app.post("/recalibratePost", (req, res) => {
     const { new_recalibrate } = req.body; // Extract the direction from the request body
     //console.log("Button clicked:", direction); // Log the clicked direction
-    console.log("ri:", recalibrate);
     recalibrate = new_recalibrate; // Add the clicked direction to the buttonClicks array
+    console.log("ri:", recalibrate);
     res.sendStatus(200); // Send a success status code (200)
   });
 
