@@ -73,10 +73,10 @@ function plot(){
     //console.log("Button clicked:", direction); // Log the clicked direction
 
     recalibrate = new_recalibrate; // Add the clicked direction to the buttonClicks array
-    //console.log(mvmtClicks);
-    console.log("ri:", recalibrate);
     res.sendStatus(200); // Send a success status code (200)
   });
+
+  console.log("ri:", recalibrate);
 
   app.get("/recalibrate", (req, res) => {
     res.json({
