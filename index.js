@@ -40,7 +40,6 @@ function plot(){
     app.post("/mvmtClickPost", (req, res) => {
       const { direction } = req.body; // Extract the direction from the request body
       //console.log("Button clicked:", direction); // Log the clicked direction
-      console.log("ri:", recalibrate);
       mvmtClicks.unshift(direction); // Add the clicked direction to the buttonClicks array
       //console.log(mvmtClicks);
       setTimeout(function(){
