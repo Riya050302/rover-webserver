@@ -82,6 +82,21 @@ function plot(){
     });
   });
 
+  app.post("/stopleftPost", (req, res) => {
+    const { new_stopleft } = req.body; // Extract the direction from the request body
+    //console.log("Button clicked:", direction); // Log the clicked direction
+    stopleft = new_stopleft; // Add the clicked direction to the buttonClicks array
+    console.log("stop:", stopleft);
+    res.sendStatus(200); // Send a success status code (200)
+  });
+
+
+  app.get("/stopleft", (req, res) => {
+    res.json({
+      StopLeft : stopleft, // Return the buttonClicks array as JSON response
+    });
+  });
+
 
 
 function serverAlgorithm(received_coordinates){
