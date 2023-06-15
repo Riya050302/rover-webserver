@@ -45,12 +45,12 @@ function findShortestPath(coordinates, startPoint, endPoint) {
     return shortestPath;
   }
 
-// Generate random coordinates
-//const numCoordinates = 50;
-//const coordinates = Array.from({ length: numCoordinates }, () => [
-//  Math.random() * 10,
-//  Math.random() * 10,
-//]);
+//Generate random coordinates
+const numCoordinates = 50;
+const coordinates = Array.from({ length: numCoordinates }, () => [
+  Math.random() * 10,
+  Math.random() * 10,
+]);
 
 // Define start and end points
 const startPoint = [0, 0];
