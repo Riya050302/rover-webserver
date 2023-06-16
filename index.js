@@ -91,7 +91,6 @@ function plot(){
     if (stopLeft === "true"){
       console.log("stop:", stopLeft);
     }
-    console.log("stop:", stopLeft);
     res.sendStatus(200); // Send a success status code (200)
   });
 
