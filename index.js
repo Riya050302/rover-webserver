@@ -31,7 +31,7 @@ function plot(){
       // Generate random coordinates and add them to the array
         coordinates.push({ x, y }); // Add the coordinate to the array
         console.log({ x, y });
-        console.log(plot);
+        //console.log(plot);
       
       res.json({ coordinates }); // Send the coordinates array as a single response
     });
