@@ -71,19 +71,18 @@ function plot(){
     const { new_recalibrate } = req.body; // Extract the direction from the request body
     //console.log("Button clicked:", direction); // Log the clicked direction
     recalibrate = new_recalibrate; // Add the clicked direction to the buttonClicks array
+    if (stopLeft === "true"){
       console.log("ri:", recalibrate);
+    }
     res.sendStatus(200); // Send a success status code (200)
   });
 
 
-
-
-app.get("/recalibrate", (req, res) => {
+  app.get("/recalibrate", (req, res) => {
     res.json({
-      Recalibrate: recalibrate, // Return the buttonClicks array as JSON response
+      Recalibrate : recalibrate, // Return the buttonClicks array as JSON response
     });
-    res.sendStatus(200);
-});
+  });
 
   app.post("/stopleftPost", (req, res) => {
     const { new_stopleft } = req.body; // Extract the direction from the request body
