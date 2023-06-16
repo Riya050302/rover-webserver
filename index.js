@@ -86,8 +86,6 @@ function plot(){
     const { new_stopleft } = req.body; // Extract the direction from the request body
     //console.log("Button clicked:", direction); // Log the clicked direction
     stopLeft = new_stopleft; // Add the clicked direction to the buttonClicks array
-    if (stopLeft === "true"){
-    }
     console.log("stop:", stopLeft);
     res.sendStatus(200); // Send a success status code (200)
   });
