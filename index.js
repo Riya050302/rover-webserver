@@ -130,8 +130,8 @@ function serverAlgorithm(received_coordinates){
   //});
 
   app.get("/nextDirectionAndRecalibrateAndStopLeft", (req, res) => {
-    res.json({ Direction: direction, Recalibrate : recalibrate });
-   // console.log('Direction:', direction);
+    res.json({ Direction: direction, Recalibrate : recalibrate, StopLeft : stopLeft });
+    console.log('Direction:', direction);
     direction = mvmtClicks.pop();
     plot();
   });
