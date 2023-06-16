@@ -87,8 +87,8 @@ function plot(){
     //console.log("Button clicked:", direction); // Log the clicked direction
     stopLeft = new_stopleft; // Add the clicked direction to the buttonClicks array
     if (stopLeft === "true"){
-      console.log("stop:", stopLeft);
     }
+    console.log("stop:", stopLeft);
     res.sendStatus(200); // Send a success status code (200)
   });
 
