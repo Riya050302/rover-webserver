@@ -21,19 +21,17 @@ let y = 3;
 var modeType;
 let mvmtClicks = []; // Array to store button click data
 let recalibrate = "false";
-
+let stopLeft = "false";
 
 function plot(){
       //================FOR CLIENT LAPTOP================================================
-      //console.log(plot);
+      console.log(plot);
     //GET REQUEST (Client Laptop)======================================================
     app.get("/numericalInput", (req, res) => {
       // Generate random coordinates and add them to the array
         coordinates.push({ x, y }); // Add the coordinate to the array
-        console.log([ x, y ],",");
-        
-        //console.log({ x, y });
-        //console.log(plot);
+        console.log({ x, y });
+        console.log(plot);
       
       res.json({ coordinates }); // Send the coordinates array as a single response
     });
@@ -42,7 +40,6 @@ function plot(){
     app.post("/mvmtClickPost", (req, res) => {
       const { direction } = req.body; // Extract the direction from the request body
       //console.log("Button clicked:", direction); // Log the clicked direction
-
       mvmtClicks.unshift(direction); // Add the clicked direction to the buttonClicks array
       //console.log(mvmtClicks);
       setTimeout(function(){
@@ -73,15 +70,32 @@ function plot(){
   app.post("/recalibratePost", (req, res) => {
     const { new_recalibrate } = req.body; // Extract the direction from the request body
     //console.log("Button clicked:", direction); // Log the clicked direction
-
     recalibrate = new_recalibrate; // Add the clicked direction to the buttonClicks array
-    //console.log(mvmtClicks);
+    //console.log("ri:", recalibrate);
     res.sendStatus(200); // Send a success status code (200)
   });
+
 
   app.get("/recalibrate", (req, res) => {
     res.json({
       Recalibrate : recalibrate, // Return the buttonClicks array as JSON response
+    });
+  });
+
+  app.post("/stopleftPost", (req, res) => {
+    const { new_stopleft } = req.body; // Extract the direction from the request body
+    //console.log("Button clicked:", direction); // Log the clicked direction
+    stopLeft = new_stopleft; // Add the clicked direction to the buttonClicks array
+    if (stopLeft === "true"){
+      //console.log("stop:", stopLeft);
+    }
+    res.sendStatus(200); // Send a success status code (200)
+  });
+
+
+  app.get("/stopleft", (req, res) => {
+    res.json({
+      StopLeft : stopLeft, // Return the buttonClicks array as JSON response
     });
   });
 
