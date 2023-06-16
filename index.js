@@ -92,7 +92,7 @@ app.post("/stopleftPost", (req, res) => {
   setTimeout(function () {
     console.log("stop:", stopleft);
     res.sendStatus(200); // Send a success status code (200)
-  }, 1000);
+  }, 5000);
 });
 
 app.get("/stopleft", (req, res) => {
