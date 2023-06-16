@@ -40,7 +40,6 @@ function plot(){
     app.post("/mvmtClickPost", (req, res) => {
       const { direction } = req.body; // Extract the direction from the request body
       //console.log("Button clicked:", direction); // Log the clicked direction
-
       mvmtClicks.unshift(direction); // Add the clicked direction to the buttonClicks array
       //console.log(mvmtClicks);
       setTimeout(function(){
@@ -71,15 +70,30 @@ function plot(){
   app.post("/recalibratePost", (req, res) => {
     const { new_recalibrate } = req.body; // Extract the direction from the request body
     //console.log("Button clicked:", direction); // Log the clicked direction
-
     recalibrate = new_recalibrate; // Add the clicked direction to the buttonClicks array
-    //console.log(mvmtClicks);
+    console.log("ri:", recalibrate);
     res.sendStatus(200); // Send a success status code (200)
   });
+
 
   app.get("/recalibrate", (req, res) => {
     res.json({
       Recalibrate : recalibrate, // Return the buttonClicks array as JSON response
+    });
+  });
+
+  app.post("/stopleftPost", (req, res) => {
+    const { new_stopleft } = req.body; // Extract the direction from the request body
+    //console.log("Button clicked:", direction); // Log the clicked direction
+    stopleft = new_stopleft; // Add the clicked direction to the buttonClicks array
+    console.log("stop:", stopleft);
+    res.sendStatus(200); // Send a success status code (200)
+  });
+
+
+  app.get("/stopleft", (req, res) => {
+    res.json({
+      StopLeft : stopleft, // Return the buttonClicks array as JSON response
     });
   });
 
