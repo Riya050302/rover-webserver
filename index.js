@@ -166,10 +166,10 @@ function serverAlgorithm(received_coordinates){
     }
   });
   
-  app.get("/newWall", (req, res) => {
-    res.json({ newWall: NewWall });
+ // app.get("/newWall", (req, res) => {
+   // res.json({ newWall: NewWall });
     //console.log('NewWall:', NewWall);
-  });
+  //});
 
 app.listen(PORT, () => {
  // console.log(`Server listening on port ${PORT}`); // Start the server and log the port it's listening on
