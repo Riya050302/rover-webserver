@@ -71,9 +71,9 @@ function plot(){
     const { new_recalibrate } = req.body; // Extract the direction from the request body
     //console.log("Button clicked:", direction); // Log the clicked direction
     recalibrate.unshift(new_recalibrate); 
-    if (recalibrate === "true"){
-      console.log("ri:", recalibrate);
-    }
+    //if (recalibrate === "true"){
+    console.log("ri:", recalibrate);
+    //}
     setTimeout(function(){
       //const removedElement = mvmtClicks.pop();
       //console.log(removedElement);
@@ -93,9 +93,9 @@ function plot(){
     const { new_stopleft } = req.body; // Extract the direction from the request body
     //console.log("Button clicked:", direction); // Log the clicked direction
     stopLeft.unshift(new_stopleft); 
-    if (stopLeft === "true"){
-      console.log("stop:", stopLeft);
-    }
+    //if (stopLeft === "true"){
+    console.log("stop:", stopLeft);
+    //}
     res.sendStatus(200); // Send a success status code (200)
   });
 
