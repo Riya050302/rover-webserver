@@ -22,6 +22,8 @@ var modeType;
 let mvmtClicks = []; // Array to store button click data
 let recalibrate = [];
 let stopLeft = [];
+let recalibrate_var = "";
+let stopLeft_var = "";
 
 function plot(){
       //================FOR CLIENT LAPTOP================================================
@@ -84,9 +86,9 @@ function plot(){
 
 
   app.get("/recalibrate", (req, res) => {
-    recalibrate = recalibrate.pop()
+    recalibrate_var = recalibrate.pop()
     res.json({
-      Recalibrate : recalibrate, // Return the buttonClicks array as JSON response
+      Recalibrate : recalibrate_var, // Return the buttonClicks array as JSON response
     });
   });
 
@@ -102,9 +104,9 @@ function plot(){
 
 
   app.get("/stopleft", (req, res) => {
-    stopLeft = stopLeft.pop()
+    stopLeft_var = stopLeft.pop()
     res.json({
-      StopLeft : stopLeft, // Return the buttonClicks array as JSON response
+      StopLeft : stopLeft_var, // Return the buttonClicks array as JSON response
     });
   });
 
