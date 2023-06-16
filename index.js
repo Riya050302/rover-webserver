@@ -91,8 +91,8 @@ app.post("/stopleftPost", (req, res) => {
   //}
   setTimeout(function () {
     console.log("stop:", stopleft);
-  }, 2000);
-  res.sendStatus(200); // Send a success status code (200)
+    res.sendStatus(200); // Send a success status code (200)
+  }, 1000);
 });
 
 app.get("/stopleft", (req, res) => {
