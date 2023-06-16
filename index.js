@@ -30,7 +30,7 @@ function plot(){
     app.get("/numericalInput", (req, res) => {
       // Generate random coordinates and add them to the array
         coordinates.push({ x, y }); // Add the coordinate to the array
-        console.log({ x, y });
+        console.log([ x, y ]);
      //   console.log(plot);
       
       res.json({ coordinates }); // Send the coordinates array as a single response
@@ -111,14 +111,6 @@ function serverAlgorithm(received_coordinates){
     }    
     x = nums[0];
     y = nums[1];
-    //const nums = received_coordinates.slice(1, -1).split(',').map(Number);
-    const xwall = nums[0] + constant;
-    const ywall = nums[1] + constant;
-    wallCoordinate = `[${xwall},${ywall}]`;
-   // console.log(wallCoordinate); // Output: [xwall,ywall]
-    //current_coordinates = received_coordinates.split(",").map(coord => parseInt(coord.trim()));
-    //wallCoordinate = current_coordinates.map(coord => coord + constant);
-   // console.log("wallCoordinate:",wallCoordinate);
     res.sendStatus(200); // Send a success status code (200)
   });
 
