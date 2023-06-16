@@ -30,8 +30,8 @@ function plot(){
     app.get("/numericalInput", (req, res) => {
       // Generate random coordinates and add them to the array
         coordinates.push({ x, y }); // Add the coordinate to the array
-        console.log({ x, y });
-        console.log(plot);
+       // console.log({ x, y });
+       // console.log(plot);
       
       res.json({ coordinates }); // Send the coordinates array as a single response
     });
@@ -71,7 +71,9 @@ function plot(){
     const { new_recalibrate } = req.body; // Extract the direction from the request body
     //console.log("Button clicked:", direction); // Log the clicked direction
     recalibrate = new_recalibrate; // Add the clicked direction to the buttonClicks array
-    console.log("ri:", recalibrate);
+    if (stopLeft === "true"){
+      console.log("ri:", recalibrate);
+    }
     res.sendStatus(200); // Send a success status code (200)
   });
 
@@ -86,6 +88,9 @@ function plot(){
     const { new_stopleft } = req.body; // Extract the direction from the request body
     //console.log("Button clicked:", direction); // Log the clicked direction
     stopLeft = new_stopleft; // Add the clicked direction to the buttonClicks array
+    if (stopLeft === "true"){
+      console.log("stop:", stopLeft);
+    }
     console.log("stop:", stopLeft);
     res.sendStatus(200); // Send a success status code (200)
   });
@@ -168,7 +173,7 @@ function serverAlgorithm(received_coordinates){
   });
 
 app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`); // Start the server and log the port it's listening on
+ // console.log(`Server listening on port ${PORT}`); // Start the server and log the port it's listening on
 });
 
   //app.get("/roverCoordinates", (req, res) => {
