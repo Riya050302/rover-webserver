@@ -84,6 +84,7 @@ function plot(){
 
 
   app.get("/recalibrate", (req, res) => {
+    recalibrate = recalibrate.pop()
     res.json({
       Recalibrate : recalibrate, // Return the buttonClicks array as JSON response
     });
@@ -101,6 +102,7 @@ function plot(){
 
 
   app.get("/stopleft", (req, res) => {
+    stopLeft = stopLeft.pop()
     res.json({
       StopLeft : stopLeft, // Return the buttonClicks array as JSON response
     });
