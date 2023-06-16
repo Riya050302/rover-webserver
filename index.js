@@ -77,7 +77,6 @@ function plot(){
 
 
 
-let recalibrateCount = 0; // Track the number of recalibrate signals sent
 
 app.get("/recalibrate", (req, res) => {
     res.json({
