@@ -71,6 +71,11 @@ app.post("/recalibratePost", (req, res) => {
   //console.log("Button clicked:", direction); // Log the clicked direction
   recalibrate = new_recalibrate; // Add the clicked direction to the buttonClicks array
   //console.log("recalibrate:", recalibrate);
+  setTimeout(function () {
+    //const removedElement = mvmtClicks.pop();
+    //console.log(removedElement);
+    //console.log("Delayed by 2 seconds");
+  }, 1000);
   res.sendStatus(200); // Send a success status code (200)
 });
 
@@ -87,6 +92,11 @@ app.post("/stopleftPost", (req, res) => {
   //if (stopleft === "true") {
     console.log("stop:", stopleft);
   //}
+  setTimeout(function () {
+    //const removedElement = mvmtClicks.pop();
+    //console.log(removedElement);
+    //console.log("Delayed by 2 seconds");
+  }, 2000);
   res.sendStatus(200); // Send a success status code (200)
 });
 
