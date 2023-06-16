@@ -21,6 +21,7 @@ let y = 3;
 var modeType;
 let mvmtClicks = []; // Array to store button click data
 let recalibrate = "false";
+let stopleft = "false";
 
 function plot() {
   //================FOR CLIENT LAPTOP================================================
