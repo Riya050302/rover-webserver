@@ -25,7 +25,7 @@ let recalibrate = "false";
 
 function plot(){
       //================FOR CLIENT LAPTOP================================================
-   //   console.log(plot);
+     // console.log(plot);
     //GET REQUEST (Client Laptop)======================================================
     app.get("/numericalInput", (req, res) => {
       // Generate random coordinates and add them to the array
@@ -33,7 +33,7 @@ function plot(){
         console.log({ x, y });
      //   console.log(plot);
       
-     // res.json({ coordinates }); // Send the coordinates array as a single response
+      res.json({ coordinates }); // Send the coordinates array as a single response
     });
 
     //POST REQUEST (Client Laptop)======================================================
@@ -63,7 +63,7 @@ function plot(){
       const { mode } = req.body; // Extract the mode from the request body
 
       modeType = mode; // Update the manual mode flag
-    //  console.log("Mode:", mode);
+      console.log("Mode:", mode);
       res.sendStatus(200); // Send a success status code (200)
     });
   }
