@@ -101,7 +101,7 @@ function serverAlgorithm(received_coordinates){
 
   app.post("/roverCoordinateAndWallDetection", (req, res) => {
      const { jsonPacket } = req.body; // Extract the coordinates from the request body
-      console.log("data:", jsonPacket); // Log the received coordinates // You can perform any necessary processing with the coordinates here
+     // console.log("data:", jsonPacket); // Log the received coordinates // You can perform any necessary processing with the coordinates here
     
       const received_coordinates = jsonPacket.received_coordinates;
       const wall_detection = jsonPacket.received_walldetection;
@@ -113,7 +113,7 @@ function serverAlgorithm(received_coordinates){
     } else if (Array.isArray(received_coordinates)) {    
       nums = received_coordinates.map(Number);
     } else {
-      console.log("Invalid data type for received_coordinates.");
+    // console.log("Invalid data type for received_coordinates.");
     }    
     x = nums[0];
     y = nums[1];
@@ -132,8 +132,6 @@ function serverAlgorithm(received_coordinates){
   app.get("/nextDirectionAndRecalibrateAndStopLeft", (req, res) => {
     res.json({ Direction: direction, Recalibrate : recalibrate });
    // console.log('Direction:', direction);
-    console.log('Recalibrate:', recalibrate);
-    console.log('StopLeft:', stopLeft);
     direction = mvmtClicks.pop();
     plot();
   });
