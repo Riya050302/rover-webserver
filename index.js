@@ -78,11 +78,19 @@ function plot(){
   });
 
 
-  app.get("/recalibrate", (req, res) => {
+
+let recalibrateCount = 0; // Track the number of recalibrate signals sent
+
+// Route for sending recalibrate signal
+app.get("/recalibrate", (req, res) => {
+  if (recalibrateCount < 3) {
     res.json({
       Recalibrate : recalibrate, // Return the buttonClicks array as JSON response
     });
-  });
+    recalibrateCount++;
+  } 
+  res.sendStatus(200);
+});
 
   app.post("/stopleftPost", (req, res) => {
     const { new_stopleft } = req.body; // Extract the direction from the request body
