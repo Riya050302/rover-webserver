@@ -21,7 +21,7 @@ let y = 3;
 var modeType;
 let mvmtClicks = []; // Array to store button click data
 let recalibrate = "false";
-let stopleft = "false";
+let stopLeft = "false";
 
 function plot(){
       //================FOR CLIENT LAPTOP================================================
@@ -85,9 +85,9 @@ function plot(){
   app.post("/stopleftPost", (req, res) => {
     const { new_stopleft } = req.body; // Extract the direction from the request body
     //console.log("Button clicked:", direction); // Log the clicked direction
-    stopleft = new_stopleft; // Add the clicked direction to the buttonClicks array
+    stopLeft = new_stopleft; // Add the clicked direction to the buttonClicks array
     if (stopLeft === "true"){
-      console.log("stop:", stopleft);
+      console.log("stop:", stopLeft);
     }
     res.sendStatus(200); // Send a success status code (200)
   });
@@ -95,7 +95,7 @@ function plot(){
 
   app.get("/stopleft", (req, res) => {
     res.json({
-      StopLeft : stopleft, // Return the buttonClicks array as JSON response
+      StopLeft : stopLeft, // Return the buttonClicks array as JSON response
     });
   });
 
