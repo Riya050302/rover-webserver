@@ -80,14 +80,10 @@ function plot(){
 let recalibrateCount = 0; // Track the number of recalibrate signals sent
 
 app.get("/recalibrate", (req, res) => {
-  if (recalibrateCount < 3) {
     res.json({
       Recalibrate: recalibrate, // Return the buttonClicks array as JSON response
     });
-    recalibrateCount++;
-  } else {
     res.sendStatus(200);
-  }
 });
 
   app.post("/stopleftPost", (req, res) => {
