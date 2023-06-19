@@ -66,6 +66,7 @@ function plot(){
 
     app.get("/recalibrate_output", (req, res) => {
       coordinates.push(recalibrate_output); // Add the coordinate to the array
+      console.log(recalibrate_output);
     res.json(recalibrate_output); // Send the coordinates array as a single response
     });
 
