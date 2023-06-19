@@ -25,7 +25,7 @@ let recalibrate = [];
 let stopLeft = [];
 let recalibrate_var = "";
 let stopLeft_var = "";
-let recalibrate_output = "";
+
 
 
 
@@ -123,7 +123,7 @@ function serverAlgorithm(received_coordinates){
       // console.log("data:", jsonPacket); // Log the received coordinates // You can perform any necessary processing with the coordinates here
        const received_coordinates = jsonPacket.received_coordinates;
        const wall_detection = jsonPacket.received_walldetection;
-       recalibrate_output = jsonPacket.recalibrate_output;
+       const recalibrate_output = jsonPacket.recalibrate_output;
      //  console.log("Recalibrate output:", recalibrate_output);
    
      //  console.log("received_coordinates:", received_coordinates);
