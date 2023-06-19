@@ -63,6 +63,11 @@ function plot(){
       });
     });
 
+    app.get("/recalibrateOutput", (req, res) => {
+      coordinates.push(recalibrateOutput); // Add the coordinate to the array
+    res.json(recalibrateOutput); // Send the coordinates array as a single response
+    });
+
 
     app.post("/setManualMode", (req, res) => {
       const { mode } = req.body; // Extract the mode from the request body
@@ -111,27 +116,29 @@ function serverAlgorithm(received_coordinates){
   //================FOR ESP32=========================================================
     //POST REQUEST (ESP32)==============================================================
 
-  app.post("/roverCoordinateAndWallDetection", (req, res) => {
-     const { jsonPacket } = req.body; // Extract the coordinates from the request body
-     // console.log("data:", jsonPacket); // Log the received coordinates // You can perform any necessary processing with the coordinates here
-    
-      const received_coordinates = jsonPacket.received_coordinates;
-      const wall_detection = jsonPacket.received_walldetection;
-  
-    //  console.log("received_coordinates:", received_coordinates);
-    let nums;
-    if (typeof received_coordinates === 'string') {
-      nums = received_coordinates.slice(1, -1).split(', ').map(Number);
-    } else if (Array.isArray(received_coordinates)) {    
-      nums = received_coordinates.map(Number);
-    } else {
-    // console.log("Invalid data type for received_coordinates.");
-    }    
-    x = nums[0];
-    y = nums[1];
-    //const nums = received_coordinates.slice(1, -1).split(',').map(Number);
-    res.sendStatus(200); // Send a success status code (200)
-  });
+    app.post("/roverCoordinateAndWallDetectionAndRecalibrationOutput", (req, res) => {
+      const { jsonPacket } = req.body; // Extract the coordinates from the request body
+      // console.log("data:", jsonPacket); // Log the received coordinates // You can perform any necessary processing with the coordinates here
+     
+       const received_coordinates = jsonPacket.received_coordinates;
+       const wall_detection = jsonPacket.received_walldetection;
+       const recalibrateOutput = jsonPacket.recalibrateOutput;
+   
+   
+     //  console.log("received_coordinates:", received_coordinates);
+     let nums;
+     if (typeof received_coordinates === 'string') {
+       nums = received_coordinates.slice(1, -1).split(', ').map(Number);
+     } else if (Array.isArray(received_coordinates)) {    
+       nums = received_coordinates.map(Number);
+     } else {
+     // console.log("Invalid data type for received_coordinates.");
+     }    
+     x = nums[0];
+     y = nums[1];
+     //const nums = received_coordinates.slice(1, -1).split(',').map(Number);
+     res.sendStatus(200); // Send a success status code (200)
+   });
 
 
   //app.post("/wallDetection", (req, res) => {
