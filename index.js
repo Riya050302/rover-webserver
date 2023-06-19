@@ -121,11 +121,10 @@ function serverAlgorithm(received_coordinates){
     app.post("/roverCoordinateAndWallDetectionAndRecalibrationOutput", (req, res) => {
       const { jsonPacket } = req.body; // Extract the coordinates from the request body
       // console.log("data:", jsonPacket); // Log the received coordinates // You can perform any necessary processing with the coordinates here
-      console.log("Recalibrate output:", recalibrate_output);
        const received_coordinates = jsonPacket.received_coordinates;
        const wall_detection = jsonPacket.received_walldetection;
        const recalibrate_output = jsonPacket.recalibrate_output;
-   
+       console.log("Recalibrate output:", recalibrate_output);
    
      //  console.log("received_coordinates:", received_coordinates);
      let nums;
