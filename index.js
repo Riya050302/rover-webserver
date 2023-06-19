@@ -25,6 +25,7 @@ let recalibrate = [];
 let stopLeft = [];
 let recalibrate_var = "";
 let stopLeft_var = "";
+let recalibrate_output = "";
 
 
 
@@ -63,9 +64,9 @@ function plot(){
       });
     });
 
-    app.get("/recalibrateOutput", (req, res) => {
-      coordinates.push(recalibrateOutput); // Add the coordinate to the array
-    res.json(recalibrateOutput); // Send the coordinates array as a single response
+    app.get("/recalibrate_output", (req, res) => {
+      coordinates.push(recalibrate_output); // Add the coordinate to the array
+    res.json(recalibrate_output); // Send the coordinates array as a single response
     });
 
 
@@ -122,7 +123,7 @@ function serverAlgorithm(received_coordinates){
      
        const received_coordinates = jsonPacket.received_coordinates;
        const wall_detection = jsonPacket.received_walldetection;
-       const recalibrateOutput = jsonPacket.recalibrateOutput;
+       const recalibrate_output = jsonPacket.recalibrate_output;
    
    
      //  console.log("received_coordinates:", received_coordinates);
