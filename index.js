@@ -124,7 +124,7 @@ function serverAlgorithm(received_coordinates){
        const received_coordinates = jsonPacket.received_coordinates;
        const wall_detection = jsonPacket.received_walldetection;
        recalibrate_output = jsonPacket.recalibrate_output;
-       console.log("Recalibrate output:", recalibrate_output);
+     //  console.log("Recalibrate output:", recalibrate_output);
    
      //  console.log("received_coordinates:", received_coordinates);
      let nums;
