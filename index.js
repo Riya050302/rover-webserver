@@ -66,8 +66,9 @@ function plot(){
 
     app.get("/recalibrateOutput", (req, res) => {
       console.log("Sent Recalibrate output:", recalibrate_output);
-    res.json(recalibrate_output); // Send the coordinates array as a single response
+      res.json({ recalibrate_output }); // Send the recalibrate_output as a JSON response
     });
+    
 
 
     app.post("/setManualMode", (req, res) => {
