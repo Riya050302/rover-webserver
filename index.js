@@ -151,7 +151,7 @@ function serverAlgorithm(received_coordinates){
   //});
 
   app.get("/nextDirectionAndRecalibrateAndStopLeft", (req, res) => {
-    console.log("Recalibrate:", recalibrate);
+   // console.log("Recalibrate:", recalibrate);
     recalibrate_var = recalibrate.pop()
     stopLeft_var = stopLeft.pop()
     res.json({ Direction: direction, Recalibrate : recalibrate, StopLeft : stopLeft , Recalibrate : recalibrate_var, StopLeft : stopLeft_var});
