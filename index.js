@@ -31,12 +31,12 @@ let recalibrate_output = "";
 
 function plot(){
       //================FOR CLIENT LAPTOP================================================
-      console.log(plot);
+    //console.log(plot);
     //GET REQUEST (Client Laptop)======================================================
     app.get("/numericalInput", (req, res) => {
       // Generate random coordinates and add them to the array
         coordinates.push({ x, y }); // Add the coordinate to the array
-    //   console.log({ x, y });
+        console.log([ x, y ],",");
     //    console.log(plot);
       
       res.json({ coordinates }); // Send the coordinates array as a single response
@@ -65,7 +65,7 @@ function plot(){
     });
 
     app.get("/recalibrateOutput", (req, res) => {
-      console.log("Sent Recalibrate output:", recalibrate_output);
+      //console.log("Sent Recalibrate output:", recalibrate_output);
       res.json({ recalibrate_output }); // Send the recalibrate_output as a JSON response
     });
     
@@ -85,7 +85,7 @@ function plot(){
     //console.log("Button clicked:", direction); // Log the clicked direction
     recalibrate.unshift(new_recalibrate); 
     //if (recalibrate === "true"){
-    console.log("ri:", recalibrate);
+    //console.log("ri:", recalibrate);
     //}
     setTimeout(function(){
       //const removedElement = mvmtClicks.pop();
@@ -102,7 +102,7 @@ function plot(){
     //console.log("Button clicked:", direction); // Log the clicked direction
     stopLeft.unshift(new_stopleft); 
     //if (stopLeft === "true"){
-    console.log("stop:", stopLeft);
+    //console.log("stop:", stopLeft);
     //}
     res.sendStatus(200); // Send a success status code (200)
   });
