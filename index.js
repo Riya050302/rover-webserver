@@ -20,24 +20,17 @@ let x = 2;
 let y = 3;
 var modeType;
 let mvmtClicks = []; // Array to store button click data
-let direction = null; // Initialize the direction variable
-let recalibrate = [];
-let stopLeft = [];
-let recalibrate_var = "";
-let stopLeft_var = "";
-let recalibrate_output = "";
-
 
 
 function plot(){
       //================FOR CLIENT LAPTOP================================================
-    //console.log(plot);
+      //console.log(plot);
     //GET REQUEST (Client Laptop)======================================================
     app.get("/numericalInput", (req, res) => {
       // Generate random coordinates and add them to the array
         coordinates.push({ x, y }); // Add the coordinate to the array
         console.log([ x, y ],",");
-    //    console.log(plot);
+        //console.log(plot);
       
       res.json({ coordinates }); // Send the coordinates array as a single response
     });
@@ -64,49 +57,15 @@ function plot(){
       });
     });
 
-    app.get("/recalibrateOutput", (req, res) => {
-      //console.log("Sent Recalibrate output:", recalibrate_output);
-      res.json({ recalibrate_output }); // Send the recalibrate_output as a JSON response
-    });
-    
-
 
     app.post("/setManualMode", (req, res) => {
       const { mode } = req.body; // Extract the mode from the request body
+
       modeType = mode; // Update the manual mode flag
-    //  console.log("Mode:", mode);
+      //console.log("Mode:", mode);
       res.sendStatus(200); // Send a success status code (200)
     });
   }
-
-  
-  app.post("/recalibratePost", (req, res) => {
-    const { new_recalibrate } = req.body; // Extract the direction from the request body
-    //console.log("Button clicked:", direction); // Log the clicked direction
-    recalibrate.unshift(new_recalibrate); 
-    //if (recalibrate === "true"){
-    //console.log("ri:", recalibrate);
-    //}
-    setTimeout(function(){
-      //const removedElement = mvmtClicks.pop();
-      //console.log(removedElement);
-      //console.log("Delayed by 2 seconds");
-    }, 5000);
-    res.sendStatus(200); // Send a success status code (200)
-  });
-
-
- 
-  app.post("/stopleftPost", (req, res) => {
-    const { new_stopleft } = req.body; // Extract the direction from the request body
-    //console.log("Button clicked:", direction); // Log the clicked direction
-    stopLeft.unshift(new_stopleft); 
-    //if (stopLeft === "true"){
-    //console.log("stop:", stopLeft);
-    //}
-    res.sendStatus(200); // Send a success status code (200)
-  });
-
 
 
 function serverAlgorithm(received_coordinates){
@@ -118,72 +77,67 @@ function serverAlgorithm(received_coordinates){
   //================FOR ESP32=========================================================
     //POST REQUEST (ESP32)==============================================================
 
-    app.post("/roverCoordinateAndWallDetectionAndRecalibrationOutput", (req, res) => {
-      const { jsonPacket } = req.body; // Extract the coordinates from the request body
-      // console.log("data:", jsonPacket); // Log the received coordinates // You can perform any necessary processing with the coordinates here
-       const received_coordinates = jsonPacket.received_coordinates;
-       const wall_detection = jsonPacket.received_walldetection;
-       const receivedrecalibrate = jsonPacket.recalibrate_output;
-       recalibrate_output = receivedrecalibrate 
-     //  console.log("Recalibrate output:", recalibrate_output);
-   
-     //  console.log("received_coordinates:", received_coordinates);
-     let nums;
-     if (typeof received_coordinates === 'string') {
-       nums = received_coordinates.slice(1, -1).split(', ').map(Number);
-     } else if (Array.isArray(received_coordinates)) {    
-       nums = received_coordinates.map(Number);
-     } else {
-     // console.log("Invalid data type for received_coordinates.");
-     }    
-     x = nums[0];
-     y = nums[1];
-     //const nums = received_coordinates.slice(1, -1).split(',').map(Number);
-     res.sendStatus(200); // Send a success status code (200)
-   });
+  app.post("/roverCoordinatePost", (req, res) => {
+
+    const { received_coordinates } = req.body; // Extract the coordinates from the request body
+    //console.log("Received coordinates:", received_coordinates); // Log the received coordinates // You can perform any necessary processing with the coordinates here
+    //coordinates.push(received_coordinates);
+    //console.log("Updated Array of coordinates:", coordinates);
+    
+    let nums;
+    if (typeof received_coordinates === 'string') {
+      nums = received_coordinates.slice(1, -1).split(', ').map(Number);
+    } else if (Array.isArray(received_coordinates)) {    
+      nums = received_coordinates.map(Number);
+    } else {
+      //console.log("Invalid data type for received_coordinates.");
+    }    
+    x = nums[0];
+    y = nums[1];
+    //const nums = received_coordinates.slice(1, -1).split(',').map(Number);
+    const xwall = nums[0] + constant;
+    const ywall = nums[1] + constant;
+    wallCoordinate = `[${xwall},${ywall}]`;
+    //console.log(wallCoordinate); // Output: [xwall,ywall]
+    //current_coordinates = received_coordinates.split(",").map(coord => parseInt(coord.trim()));
+    //wallCoordinate = current_coordinates.map(coord => coord + constant);
+    //console.log("wallCoordinate:",wallCoordinate);
+    res.sendStatus(200); // Send a success status code (200)
+  });
 
 
-  //app.post("/wallDetection", (req, res) => {
-  //  const {received_walldetection } = req.body; // Extract the coordinates from the request body
-  //  console.log("Received wall detection:", received_walldetection); // Log the received coordinates // You can perform any necessary processing with the coordinates here
-  //  wall_detection = received_walldetection;   
-  //  res.sendStatus(200); // Send a success status code (200)
-  //});
+  app.post("/wallDetection", (req, res) => {
+    const {received_walldetection } = req.body; // Extract the coordinates from the request body
+    //console.log("Received wall detection:", received_walldetection); // Log the received coordinates // You can perform any necessary processing with the coordinates here
+    wall_detection = received_walldetection;   
+    res.sendStatus(200); // Send a success status code (200)
+  });
 
-  app.get("/nextDirectionAndRecalibrateAndStopLeft", (req, res) => {
-   // console.log("Recalibrate:", recalibrate);
-    recalibrate_var = recalibrate.pop()
-    stopLeft_var = stopLeft.pop()
-    res.json({ Direction: direction, Recalibrate : recalibrate, StopLeft : stopLeft , Recalibrate : recalibrate_var, StopLeft : stopLeft_var});
-    direction = mvmtClicks.pop();
-    plot();
+  app.get("/nextDirection", (req, res) => {
+    if (wall_detection == "true" && !walls_plotted.includes(wallCoordinate)) {
+      walls_plotted.push(wallCoordinate);
+      NewWall = "true";
+    //  plot(wallCoordinate, modeType);
+    } else {
+      NewWall = "false";
+      //direction = serverAlgorithm(current_coordinates);
+     // if (mvmtClicks.length > 0){
+        direction = mvmtClicks.pop()
+    //  }
+      res.json({ Direction: direction });
+     // console.log('direction:', direction);
+      plot()
+    //  plot(x,y, modeType);
+    }
   });
   
-
-
- // app.get("/nextDirection", (req, res) => {
- //   if (wall_detection == "true" && !walls_plotted.includes(wallCoordinate)) {
- //     walls_plotted.push(wallCoordinate);
- //     NewWall = "true";
- //   //  plot(wallCoordinate, modeType);
- //   } else {
- //     NewWall = "false";
- //     //direction = serverAlgorithm(current_coordinates);
- //     direction = mvmtClicks.pop()
- //     res.json({ Direction: direction });
- //     console.log('direction:', direction);
- //     plot()
- //   //  plot(x,y, modeType);
- //   }
- // });
- // 
- // app.get("/newWall", (req, res) => {
- //   res.json({ newWall: NewWall });
- //   console.log('NewWall:', NewWall);
- // });
+  app.get("/newWall", (req, res) => {
+    res.json({ newWall: NewWall });
+   // console.log('NewWall:', NewWall);
+  });
 
 app.listen(PORT, () => {
- // console.log(`Server listening on port ${PORT}`); // Start the server and log the port it's listening on
+  //console.log(`Server listening on port ${PORT}`); // Start the server and log the port it's listening on
 });
 
   //app.get("/roverCoordinates", (req, res) => {
