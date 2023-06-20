@@ -154,7 +154,7 @@ function serverAlgorithm(received_coordinates){
     recalibrate_var = recalibrate.pop()
     stopLeft_var = stopLeft.pop()
     res.json({ Direction: direction, Recalibrate : recalibrate, StopLeft : stopLeft , Recalibrate : recalibrate_var, StopLeft : stopLeft_var});
-    //console.log('Direction:', direction);
+    console.log('Recalibrate', recalibrate);
     direction = mvmtClicks.pop();
     plot();
   });
