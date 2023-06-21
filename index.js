@@ -150,11 +150,12 @@ function serverAlgorithm(received_coordinates){
   //  res.sendStatus(200); // Send a success status code (200)
   //});
 
-  app.get("/nextDirectionAndRecalibrateAndStopLeft", (req, res) => {
+  app.get("/nextDirectionAndRecalibrateAndStopLeftAndBeacon", (req, res) => {
    // console.log("Recalibrate:", recalibrate);
     recalibrate_var = recalibrate.pop()
     stopLeft_var = stopLeft.pop()
-    res.json({ Direction: direction, Recalibrate : recalibrate, StopLeft : stopLeft , Recalibrate : recalibrate_var, StopLeft : stopLeft_var});
+    beacon_var = beacon.pop()
+    res.json({ Direction: direction , Recalibrate : recalibrate_var, StopLeft : stopLeft_var, Beacon : beacon_var});
     direction = mvmtClicks.pop();
     plot();
   });
