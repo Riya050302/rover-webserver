@@ -389,6 +389,7 @@ const coordinates = [
 [ -6, 275 ] ,
 [ -8, 283 ] ,
 [ -8, 283 ],
+[null, null],
 [ 51, 330 ] ,
     [ 51, 330 ] ,
     [ 54, 325 ] ,
@@ -630,10 +631,12 @@ let maxX = -Infinity;
 let maxY = -Infinity;
 
 coordinates.forEach(([x, y]) => {
-  if (x < minX) minX = x;
-  if (y < minY) minY = y;
-  if (x > maxX) maxX = x;
-  if (y > maxY) maxY = y;
+  if (x !== null && y !== null) {
+    if (x < minX) minX = x;
+    if (y < minY) minY = y;
+    if (x > maxX) maxX = x;
+    if (y > maxY) maxY = y;
+  }
 });
 
 // Calculate canvas size based on coordinate range
@@ -651,19 +654,32 @@ ctx.strokeStyle = 'black';
 ctx.lineWidth = 2;
 
 // Adjust the coordinate values to fit within the canvas
-const adjustedCoordinates = coordinates.map(([x, y]) => [x - minX + 5, y - minY + 5]);
+const adjustedCoordinates = coordinates.map(([x, y]) => {
+  if (x !== null && y !== null) {
+    return [x - minX + 5, y - minY + 5];
+  }
+  return null;
+});
 
 // Connect the adjusted coordinates and store line coordinates
 ctx.beginPath();
-ctx.moveTo(adjustedCoordinates[0][0], adjustedCoordinates[0][1]);
+let isIsland = false;
 
-const lineCoordinates = [adjustedCoordinates[0]]; // Array to store line coordinates
-
-for (let i = 1; i < adjustedCoordinates.length; i++) {
-  const [x, y] = adjustedCoordinates[i];
-  ctx.lineTo(x, y);
-  lineCoordinates.push([x, y]);
-}
+adjustedCoordinates.forEach((coordinate) => {
+  if (coordinate === null) {
+    if (!isIsland) {
+      ctx.stroke();
+      ctx.beginPath();
+      isIsland = true;
+    }
+  } else {
+    if (isIsland) {
+      ctx.moveTo(coordinate[0], coordinate[1]);
+      isIsland = false;
+    }
+    ctx.lineTo(coordinate[0], coordinate[1]);
+  }
+});
 
 ctx.stroke();
 
@@ -675,7 +691,7 @@ stream.pipe(out);
 out.on('finish', () => console.log('Image created: path.jpg'));
 
 // Use the line coordinates as needed
-console.log('Line coordinates:', lineCoordinates);
+console.log('Line coordinates:', adjustedCoordinates.filter(coordinate => coordinate !== null));
 
 // Open the output file
 const outputStream = fs.createWriteStream('output.txt');
@@ -687,26 +703,25 @@ coordinates.forEach(coordinate => {
 
 // Calculate the distance along the blue line between two points
 function calculateDistanceAlongLine(startIndex, endIndex) {
-    let distance = 0;
-    for (let i = startIndex; i < endIndex; i++) {
-      const x1 = coordinates[i][0];
-      const y1 = coordinates[i][1];
-      const x2 = coordinates[i + 1][0];
-      const y2 = coordinates[i + 1][1];
-      const dx = x2 - x1;
-      const dy = y2 - y1;
-      distance += Math.sqrt(dx * dx + dy * dy);
-    }
-    return distance;
+  let distance = 0;
+  for (let i = startIndex; i < endIndex; i++) {
+    const x1 = coordinates[i][0];
+    const y1 = coordinates[i][1];
+    const x2 = coordinates[i + 1][0];
+    const y2 = coordinates[i + 1][1];
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    distance += Math.sqrt(dx * dx + dy * dy);
   }
-  
-  // Example usage: calculate distance between points at index 10 and 20
-  const startIndex = 10;
-  const endIndex = 20;
-  const distance = calculateDistanceAlongLine(startIndex, endIndex);
-  
-  console.log(`Distance along the blue line between points ${startIndex} and ${endIndex}: ${distance}`);
-  
-  // Close the output file
-  outputStream.end();
-  
+  return distance;
+}
+
+// Example usage: calculate distance between points at index 10 and 20
+const startIndex = 10;
+const endIndex = 20;
+const distance = calculateDistanceAlongLine(startIndex, endIndex);
+
+console.log(`Distance along the blue line between points ${startIndex} and ${endIndex}: ${distance}`);
+
+// Close the output file
+outputStream.end();
