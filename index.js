@@ -23,7 +23,9 @@ let mvmtClicks = []; // Array to store button click data
 let direction = null; // Initialize the direction variable
 let recalibrate = [];
 let stopLeft = [];
+let beacon = [];
 let recalibrate_var = "";
+let beacon_var = "";
 let stopLeft_var = "";
 let recalibrate_output = "";
 
@@ -101,6 +103,17 @@ function plot(){
     const { new_stopleft } = req.body; // Extract the direction from the request body
     //console.log("Button clicked:", direction); // Log the clicked direction
     stopLeft.unshift(new_stopleft); 
+    //if (stopLeft === "true"){
+    //console.log("stop:", stopLeft);
+    //}
+    res.sendStatus(200); // Send a success status code (200)
+  });
+
+
+  app.post("/beaconPost", (req, res) => {
+    const { new_beacon } = req.body; // Extract the direction from the request body
+    //console.log("Button clicked:", direction); // Log the clicked direction
+    beacon.unshift(new_beacon); 
     //if (stopLeft === "true"){
     //console.log("stop:", stopLeft);
     //}
