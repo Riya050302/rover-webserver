@@ -23,11 +23,13 @@ let mvmtClicks = []; // Array to store button click data
 let direction = null; // Initialize the direction variable
 let recalibrate = [];
 let stopLeft = [];
+let complete = [];
 let beacon = [];
 let recalibrate_var = "";
 let beacon_var = "";
 let stopLeft_var = "";
 let recalibrate_output = "";
+let complete_var = "";
 
 
 
@@ -120,6 +122,15 @@ function plot(){
     res.sendStatus(200); // Send a success status code (200)
   });
 
+  app.post("/completePost", (req, res) => {
+    const { new_complete } = req.body; // Extract the direction from the request body
+    //console.log("Button clicked:", direction); // Log the clicked direction
+    complete.unshift(new_complete); 
+    //if (stopLeft === "true"){
+    //console.log("stop:", stopLeft);
+    //}
+    res.sendStatus(200); // Send a success status code (200)
+  });
 
 
 function serverAlgorithm(received_coordinates){
@@ -163,12 +174,13 @@ function serverAlgorithm(received_coordinates){
   //  res.sendStatus(200); // Send a success status code (200)
   //});
 
-  app.get("/nextDirectionAndRecalibrateAndStopLeftAndBeacon", (req, res) => {
+  app.get("/nextDirectionAndRecalibrateAndStopLeftAndBeaconAndComplete", (req, res) => {
    // console.log("Recalibrate:", recalibrate);
     recalibrate_var = recalibrate.pop()
     stopLeft_var = stopLeft.pop()
     beacon_var = beacon.pop()
-    res.json({ Direction: direction , Recalibrate : recalibrate_var, StopLeft : stopLeft_var, Beacon : beacon_var});
+    complete_var = complete.pop()
+    res.json({ Direction: direction , Recalibrate : recalibrate_var, StopLeft : stopLeft_var, Beacon : beacon_var, Complete : complete_var});
     direction = mvmtClicks.pop();
     plot();
   });
