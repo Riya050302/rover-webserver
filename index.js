@@ -162,6 +162,11 @@ function serverAlgorithm(received_coordinates){
      }    
      x = nums[0];
      y = nums[1];
+
+     if ((x === 7777) && (y === 7777)){
+      x = null;
+      y = null;
+     }
      //const nums = received_coordinates.slice(1, -1).split(',').map(Number);
      res.sendStatus(200); // Send a success status code (200)
    });
